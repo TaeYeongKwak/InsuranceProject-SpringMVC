@@ -9,6 +9,8 @@ import com.project.insurance.type.InsuranceProductType;
 
 public interface ContractService {
 	
+	public Accident searchByAccidentNum(int accidentNum) throws SQLException; 
+	
 	public ArrayList<Contract> searchListByApproval(boolean approval) throws SQLException; // 승인별 계약 리스트 조회
 	
 	public ArrayList<Accident> searchAccidentListByProductType(InsuranceProductType insuranceProductType) throws SQLException; // 보험타입별 사고 리스트 조회

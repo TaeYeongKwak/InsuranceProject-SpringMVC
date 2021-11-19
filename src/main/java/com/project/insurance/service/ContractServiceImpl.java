@@ -38,6 +38,11 @@ public class ContractServiceImpl implements ContractService{
 		this.medicalHistoryDao = medicalHistoryDao;
 		this.managerDao = managerDao;
 	}
+	
+	@Override
+	public Accident searchByAccidentNum(int accidentNum) throws SQLException {
+		return accidentDao.search(accidentNum);
+	}
 
 	@Override
 	public ArrayList<Contract> searchListByApproval(boolean approval) throws SQLException{
