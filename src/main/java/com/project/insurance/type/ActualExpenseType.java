@@ -1,6 +1,6 @@
 package com.project.insurance.type;
 public enum ActualExpenseType {
-	ADMISSION("�엯�썝"), HOSPITALTREATMENT("蹂묒썝吏꾨즺鍮�"), MEDICINEPRESCRIPTION("�빟泥섎갑鍮�");
+	ADMISSION("입원"), HOSPITALTREATMENT("병원진료비"), MEDICINEPRESCRIPTION("약처방비");
 	
 	private String actualexpensename;
 	
