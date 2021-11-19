@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.project.insurance.model.Client;
@@ -18,11 +17,10 @@ import com.project.insurance.model.manager.Manager;
 @Repository
 public class ContractDaoImpl implements ContractDao{
 	
-	private final SqlSessionFactory sqlSessionFactory;
-	private SqlSession sqlSession;
+private final SqlSession sqlSession;
 	
-	public ContractDaoImpl(SqlSessionFactory sqlSessionFactory) {
-		this.sqlSessionFactory = sqlSessionFactory;
+	public ContractDaoImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 	}
 
 	@Override
@@ -36,26 +34,17 @@ public class ContractDaoImpl implements ContractDao{
 		map.put("clientID", contract.getClient().getId());
 		map.put("insuranceProductName", contract.getInsuranceProduct().getProductName());
 		
-		sqlSession = sqlSessionFactory.openSession();
-		try {
-			int value = sqlSession.insert("contract_insert", map);
-			System.out.println(value);
-			return true;
-		}finally {
-			sqlSession.close();
-		}
+		int value = sqlSession.insert("contract_insert", map);
+		System.out.println(value);
+		return true;
 	}
 
 	@Override
 	public boolean delete(Contract contract) throws SQLException{
-		sqlSession = sqlSessionFactory.openSession();
-		try {
-			int value = sqlSession.delete("contract_delete", contract);
-			System.out.println(value);
-			return true;
-		}finally {
-			sqlSession.close();
-		}
+		int value = sqlSession.delete("contract_delete", contract);
+		System.out.println(value);
+		return true;
+		
 	}
 
 	@Override
@@ -64,41 +53,27 @@ public class ContractDaoImpl implements ContractDao{
 		map.put("clientId", clientID);
 		map.put("insuranceProductName", productName);
 		
-		sqlSession = sqlSessionFactory.openSession();
-		try {
-			HashMap<String, Object> contractMap = sqlSession.selectOne("contract_selectOne", map);
-			return this.toContract(contractMap);
-		}finally {
-			sqlSession.close();
-		}
+		HashMap<String, Object> contractMap = sqlSession.selectOne("contract_selectOne", map);
+		return this.toContract(contractMap);
+		
 	}
 
 	@Override
 	public ArrayList<Contract> searchByClient(String clientID) throws SQLException{
-		sqlSession = sqlSessionFactory.openSession();
-		try {
-			List<HashMap<String, Object>> contractList = sqlSession.selectList("contract_selectClientId", clientID);
-			ArrayList<Contract> contractArray = new ArrayList<Contract>();
-			for(int i = 0; i < contractList.size(); i++)
-				contractArray.add(this.toContract(contractList.get(i)));
-			return contractArray;
-		}finally {
-			sqlSession.close();
-		}
+		List<HashMap<String, Object>> contractList = sqlSession.selectList("contract_selectClientId", clientID);
+		ArrayList<Contract> contractArray = new ArrayList<Contract>();
+		for(int i = 0; i < contractList.size(); i++)
+			contractArray.add(this.toContract(contractList.get(i)));
+		return contractArray;
 	}
 
 	@Override
 	public ArrayList<Contract> searchBySalesPerson(String salesPerson) throws SQLException{
-		sqlSession = sqlSessionFactory.openSession();
-		try {
-			List<HashMap<String, Object>> contractList = sqlSession.selectList("contract_selectManagerId", salesPerson);
-			ArrayList<Contract> contractArray = new ArrayList<Contract>();
-			for(int i = 0; i < contractList.size(); i++)
-				contractArray.add(this.toContract(contractList.get(i)));
-			return contractArray;
-		}finally {
-			sqlSession.close();
-		}
+		List<HashMap<String, Object>> contractList = sqlSession.selectList("contract_selectManagerId", salesPerson);
+		ArrayList<Contract> contractArray = new ArrayList<Contract>();
+		for(int i = 0; i < contractList.size(); i++)
+			contractArray.add(this.toContract(contractList.get(i)));
+		return contractArray;
 	}
 
 	@Override
@@ -112,28 +87,21 @@ public class ContractDaoImpl implements ContractDao{
 		map.put("clientID", contract.getClient().getId());
 		map.put("insuranceProductName", contract.getInsuranceProduct().getProductName());
 		
-		sqlSession = sqlSessionFactory.openSession();
-		try {
-			int value = sqlSession.selectOne("contract_update", map);
-			System.out.println(value);
-			return true;
-		}finally {
-			sqlSession.close();
-		}
+		
+		int value = sqlSession.selectOne("contract_update", map);
+		System.out.println(value);
+		return true;
+		
 	}
 
 	@Override
 	public ArrayList<Contract> findAll() throws SQLException{
-		sqlSession = sqlSessionFactory.openSession();
-		try {
-			List<HashMap<String, Object>> contractList = sqlSession.selectList("contract_selectAll");
-			ArrayList<Contract> contractArray = new ArrayList<Contract>();
-			for(int i = 0; i < contractList.size(); i++)
-				contractArray.add(this.toContract(contractList.get(i)));
-			return contractArray;
-		}finally {
-			sqlSession.close();
-		}
+		
+		List<HashMap<String, Object>> contractList = sqlSession.selectList("contract_selectAll");
+		ArrayList<Contract> contractArray = new ArrayList<Contract>();
+		for(int i = 0; i < contractList.size(); i++)
+			contractArray.add(this.toContract(contractList.get(i)));
+		return contractArray;
 	}
 	
 	private Contract toContract(HashMap<String, Object> contractMap) {
