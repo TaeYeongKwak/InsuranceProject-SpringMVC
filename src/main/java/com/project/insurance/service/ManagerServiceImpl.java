@@ -1,33 +1,38 @@
 package com.project.insurance.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.project.insurance.dao.ManagerDao;
 import com.project.insurance.model.manager.Manager;
 
 public class ManagerServiceImpl implements ManagerService{
 	
 	
-
+	@Autowired
+	private ManagerDao managerList;
+	
 	@Override
 	public boolean register(Manager manager) {
-		// TODO Auto-generated method stub
-		return false;
+		return managerList.add(manager);
 	}
 
 	@Override
 	public Manager login(String id, String pw) {
-		// TODO Auto-generated method stub
-		return null;
+		return managerList.search(id, pw);
 	}
 
 	@Override
 	public boolean delete(String id, String pw) {
-		// TODO Auto-generated method stub
-		return false;
+		Manager manager = managerList.search(id, pw);
+		if(manager != null)
+			return managerList.delete(manager);
+		else 
+			return false;
 	}
 
 	@Override
 	public Manager checkManagerID(String managerID) {
-		// TODO Auto-generated method stub
-		return null;
+		return managerList.search(managerID);
 	}
 
 }
