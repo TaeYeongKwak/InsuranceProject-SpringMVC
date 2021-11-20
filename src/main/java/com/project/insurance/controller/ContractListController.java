@@ -23,8 +23,8 @@ public class ContractListController {
 		this.contractService = contractService;
 	}
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String showList(Model model, @RequestParam("TYPE")String type) {
+	@RequestMapping(value="/cm", method = RequestMethod.GET)
+	public String showContractManagerList(Model model, @RequestParam("TYPE")String type) {
 		try {
 			ArrayList<Contract> list = contractService.searchListByInsuranceProductType(InsuranceProductType.valueOf(type));
 			model.addAttribute("accidentList", list);
@@ -58,12 +58,12 @@ public class ContractListController {
 		return "contractList";
 	}
 	
-	@RequestMapping(value="/sales", method = RequestMethod.GET)
+	@RequestMapping(value="/sp", method = RequestMethod.GET)
 	public String showSalesPersonList(Model model, String managerId) {
 		try {
 			ArrayList<Contract> list = contractService.searchListBySalesPerson(managerId);
 			model.addAttribute("accidentList", list);
-			model.addAttribute("mode", "sales");
+			model.addAttribute("mode", "sp");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -40,8 +40,13 @@ public class ContractServiceImpl implements ContractService{
 	}
 	
 	@Override
+	public Contract searchByClientIdAndProductName(String clientId, String productName) throws SQLException {
+		return insertContractData(contractDao.search(clientId, productName));
+	}
+	
+	@Override
 	public Accident searchByAccidentNum(int accidentNum) throws SQLException {
-		return accidentDao.search(accidentNum);
+		return insertAccidentInfo(accidentDao.search(accidentNum));
 	}
 
 	@Override
@@ -122,6 +127,20 @@ public class ContractServiceImpl implements ContractService{
 	@Override
 	public boolean deleteAccidentList(Accident accident) throws SQLException {
 		return accidentDao.delete(accident);
+	}
+	
+	private Contract insertContractData(Contract contract){
+		contract.setInsuranceProduct(insuranceProductDao.search(contract.getInsuranceProduct().getProductName()));
+		Client client = clientDao.search(contract.getClient().getId());
+		MedicalHistory medicalHistory = medicalHistoryDao.search(client.getId());
+		Manager salesPerson = managerDao.search(contract.getSalesPerson().getId());
+		client.getMedicalHistory().setClientCancerCareer(medicalHistory.getClientCancerCareer());
+		client.getMedicalHistory().setFamilyCancerCareer(medicalHistory.getFamilyCancerCareer());
+		client.getMedicalHistory().setNumberOfHospitalizations(medicalHistory.getNumberOfHospitalizations());
+		client.getMedicalHistory().setNumberOfHospitalVisits(medicalHistory.getNumberOfHospitalVisits());
+		contract.setClient(client);
+		contract.setSalesPerson(salesPerson);
+		return contract;
 	}
 
 	private ArrayList<Contract> insertContractData(ArrayList<Contract> list){
