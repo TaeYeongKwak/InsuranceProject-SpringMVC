@@ -27,7 +27,8 @@ public class ContractListController {
 	public String showContractManagerList(Model model, @RequestParam("TYPE")String type) {
 		try {
 			ArrayList<Contract> list = contractService.searchListByInsuranceProductType(InsuranceProductType.valueOf(type));
-			model.addAttribute("accidentList", list);
+			model.addAttribute("contractList", list);
+			model.addAttribute("mode", "cm");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +39,7 @@ public class ContractListController {
 	public String showUnderwriterList(Model model) {
 		try {
 			ArrayList<Contract> list = contractService.searchListByApproval(false);
-			model.addAttribute("accidentList", list);
+			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "uw");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,7 +51,7 @@ public class ContractListController {
 	public String showExpiredList(Model model, @RequestParam("TYPE")String type) {
 		try {
 			ArrayList<Contract> list = contractService.searchListByExpiredDate(InsuranceProductType.valueOf(type));
-			model.addAttribute("accidentList", list);
+			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "expire");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -62,7 +63,7 @@ public class ContractListController {
 	public String showSalesPersonList(Model model, String managerId) {
 		try {
 			ArrayList<Contract> list = contractService.searchListBySalesPerson(managerId);
-			model.addAttribute("accidentList", list);
+			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "sp");
 		} catch (SQLException e) {
 			e.printStackTrace();
