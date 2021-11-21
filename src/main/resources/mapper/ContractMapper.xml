@@ -2,40 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.insurance.dao.ContractDao">
 	
-	<select id = "contract_selectAll" resultMap="hashmap">
+	<select id = "contract_selectAll" resultType="java.util.HashMap">
 		SELECT * 
 		FROM contracts;
 	</select>
 	
-	<select id="contract_selectManagerId" parameterType="string" resultMap="hashmap">
+	<select id="contract_selectManagerId" parameterType="string" resultType="java.util.HashMap">
 		SELECT * 
 		FROM contracts WHERE manager_id = #{salesPerson}
 	</select>
 	
-	<select id="contract_selectClientId" parameterType="string" resultMap="hashmap">
+	<select id="contract_selectClientId" parameterType="string" resultType="java.util.HashMap">
 		SELECT * 
 		FROM contracts WHERE client_id = #{clientID}
 	</select>
 	
-	<select id="contract_selectOne" parameterMap="hashmap" resultMap="hashmap">
+	<select id="contract_selectOne" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT * 
 		FROM contracts 
 		WHERE client_id = #{clientID} AND insurance_product_name = #{insuranceProductName}
 	</select>
 	
-	<delete id="contract_deleteOne" parameterMap="hashmap">
+	<delete id="contract_deleteOne" parameterType="java.util.HashMap">
 		DELETE 
 		FROM contracts 
 		WHERE client_id = #{clientID} AND insurance_product_name = #{insuranceProductName}
 	</delete>
 	
-	<insert id="contract_insert" parameterMap="hashmap">
+	<insert id="contract_insert" parameterType="java.util.HashMap">
 		INSERT INTO 
 		contracts(client_id, insurance_product_name, insurance_contract_date, insurance_expiry_date, manager_id, approval, months) 
 		VALUES(#{clientID}, #{insuranceProductName}, #{insuranceContractDate}, #{insuranceExpiryDate}, #{managerId}, #{approval}, #{months});
 	</insert>
 	
-	<update id="contract_update" parameterMap="hashmap">
+	<update id="contract_update" parameterType="java.util.HashMap">
 		UPDATE contracts 
 		SET insurance_contract_date = #{insuranceContractDate}, insurance_expiry_date = #{insuranceExpiryDate}, 
 		manager_id = #{managerId}, approval = #{approval}, months = #{months}

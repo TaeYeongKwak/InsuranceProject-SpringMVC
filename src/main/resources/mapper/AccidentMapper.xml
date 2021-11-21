@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.insurance.dao.AccidentDao">
 	
-	<select id = "accident_selectAll" resultType="com.project.insurance.model.Accident">
+	<select id = "accident_selectAll" resultType="java.util.HashMap">
 		SELECT * 
 		FROM accidents;
 	</select>
 	
-	<select id = "accident_selectOne" parameterType="int" resultType="com.project.insurance.model.Accident">
+	<select id = "accident_selectOne" parameterType="int" resultType="java.util.HashMap">
 		SELECT * 
 		FROM accidents 
 		WHERE accident_num = #{accidentNum}
@@ -19,7 +19,7 @@
 		WHERE accident_num = #{accidentNum}
 	</delete>
 	
-	<insert id = "accident_insert" parameterMap="hashmap">
+	<insert id = "accident_insert" parameterType="java.util.HashMap">
 		INSERT INTO accidents(client_Id, insurance_product_name, accident_detail, reception_date) 
 		VALUES(#{clientId}, #{insuranceProductName}, #{accidentDetail}, #{receptionDate});
 	</insert>
