@@ -34,9 +34,9 @@
 <body>
     <div class="list_container">
         <h2>계약 목록 조회</h2>
-        <c:if test="${mode == 'cm' || mode == 'expire' }">
+        <c:if test="${mode == 'cm' || mode == 'expire'}">
 	        <select class="form-select select_style" onchange="location.href=this.value">
-	          <option value="#1">실비보험</option>
+	          <option value="">실비보험</option>
 	          <option value="#2">암보험</option>
 	          <option value="#3">연금보험</option>
 	          <option value="#4">종신보험</option>
