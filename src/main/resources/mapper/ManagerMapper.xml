@@ -13,7 +13,7 @@
 
 	<insert id="Manager_add" parameterType="com.project.insurance.model.manager.Manager">
 		INSERT INTO mangers (name, manager_id, manager_password, age, phone_number, manager_type)
-		VALUES (#{manager_id}, #{manager_password}, #{name}, #{age}, #{phone_number}, #{manager_type})
+		VALUES (#{id}, #{password}, #{name}, #{age}, #{phoneNumber}, #{ManagerType})
 	</insert>
 
 

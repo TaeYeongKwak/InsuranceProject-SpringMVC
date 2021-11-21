@@ -36,7 +36,7 @@
         </ul>
         <div class="tab-content shadow p-4 mb-4 bg-white rounded-1">
             <div id="client_login" class="container tab-pane active">
-                <form action = "test1" method = POST>
+                <form action = "ClientLogin" method = POST>
                     <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="email" placeholder="Enter ID" name="id">
                         <label for="email">ID</label>
@@ -47,13 +47,13 @@
                     </div>
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-outline-primary">Login</button>
-                        <button type="button" class="btn btn-outline-primary">Sign Up</button>
+                        <button type="button" onclick = "location.href='ClientSginUp'" class="btn btn-outline-primary">Sign Up</button>
                     </div>
                 </form>
             </div>
     
             <div id="manager_login" class="container tab-pane fade">
-                <form action = "test2" method = POST>
+                <form action = "ManagerLogin" method = POST>
                     <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="email" placeholder="Enter ID" name="id">
                         <label for="email">ID</label>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-outline-danger">Login</button>
-                        <button type="button" class="btn btn-outline-danger">Sign Up</button>
+                        <button type="button" onclick = "location.href='ManagerSginUp'" class="btn btn-outline-danger">Sign Up</button>
                     </div>
                 </form>
             </div>

@@ -7,37 +7,33 @@ import org.springframework.stereotype.Repository;
 import com.project.insurance.model.manager.Manager;
 
 @Repository
-public class ManagerDaoImpl implements ManagerDao{
-	
+public class ManagerDaoImpl implements ManagerDao {
+
 	@Autowired
 	private SqlSession sqlSession;
-	
 
 	@Override
 	public boolean add(Manager manager) {
-		sqlSession.insert("Manager_add", manager);
-		return true;
+		return sqlSession.insert("Manager_add", manager) > 0 ? true : false;
 	}
 
 	@Override
 	public boolean delete(Manager manager) {
-		sqlSession.delete("Manager_delete", manager);
-		return false;
+		return sqlSession.delete("Manager_delete", manager) > 0 ? true : false;
 	}
 
 	@Override
-	public Manager search(String managerId, String password) {
+	public Manager search(String id, String password) {
 		Manager managersearch = new Manager();
-		managersearch.setId(managerId);
+		managersearch.setId(id);
 		managersearch.setPassword(password);
-		sqlSession.selectList("Manager_login", managersearch);
-		return null;
+		return sqlSession.selectOne("Manager_login", managersearch);
+
 	}
 
 	@Override
-	public Manager search(String managerId) {
-		sqlSession.selectOne("Manager_search", managerId);
-		return null;
+	public Manager search(String id) {
+		return sqlSession.selectOne("Manager_search", id);
 	}
 
 }

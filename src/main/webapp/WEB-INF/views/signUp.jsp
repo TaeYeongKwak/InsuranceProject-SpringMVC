@@ -44,35 +44,35 @@
         <c:choose>
 	        <c:when test="${isClient == true}">
 		        <h1>Client Sign Up</h1>
-		        <form action="#" class="was-validated" method="post">
+		        <form action="ClientRegist" class="was-validated" method="post">
 		            <div class="input-group mb-3 mt-3">
 		                <span class="input-group-text input_span">ID</span>
-		                <input type="text" class="form-control" id="id" placeholder="Enter ID" name="uid" required pattern="^[a-zA-Z0-9]+$">
+		                <input type="text" class="form-control" id="id" placeholder="Enter ID" name="id" required pattern="^[a-zA-Z0-9]+$">
 		                <button class="btn btn-primary" type="button">Check ID</button>
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
 		                <span class="input-group-text input_span">Password</span>
-		                <input type="text" class="form-control" id="upassword" placeholder="Enter Password" name="password" required>
+		                <input type="text" class="form-control" id="password" placeholder="Enter Password" name="password" required>
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
-		                <span class="input-group-text input_span">Username</span>
-		                <input type="text" class="form-control" id="uname" placeholder="Enter Username" name="name" required>
+		                <span class="input-group-text input_span">User name</span>
+		                <input type="text" class="form-control" id="name" placeholder="Enter Username" name="name" required>
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
 		                <span class="input-group-text input_span">Age</span>
-		                <input type="text" class="form-control" id="uage" placeholder="Enter Age" name="age" required pattern="^[0-9]+$">
+		                <input type="text" class="form-control" id="age" placeholder="Enter Age" name="age" required pattern="^[0-9]+$">
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3 input_interval">
 		                <span class="input-group-text input_span">Email</span>
-		                <input type="text" class="form-control" id="uemail" placeholder="Enter Email" name="email" required pattern="^[a-zA-Z0-9]+$">
+		                <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email" required pattern="^[a-zA-Z0-9]+$">
 		            </div>
 		            <div class="input-group mb-3 mt-3 input_interval">
 		                <span class="input-group-text input_span">Gender</span>
@@ -97,24 +97,24 @@
 		            </div>
 		            <div class="input-group mb-3 mt-3 input_interval">
 		                <span class="input-group-text input_span">Address</span>
-		                <input type="text" class="form-control" id="uname" placeholder="Enter Address" name="email" required readonly>
+		                <input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" required readonly>
 		                <button class="btn btn-primary" type="button">주소 찾기</button>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
 		                <span class="input-group-text input_span">Phone Number</span>
-		                <input type="text" class="form-control" id="uname" placeholder="Enter Phone Number" name="email" required >
+		                <input type="text" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber" required >
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
-		                <span class="input-group-text input_span">Regist Number</span>
-		                <input type="text" class="form-control" id="uname" placeholder="Enter First Regist Number" name="email" required>
+		                <span class="input-group-text input_span">Register Number</span>
+		                <input type="text" class="form-control" id="residentRegistrationNumber" placeholder="Enter First Regist Number" name="residentRegistrationNumber" required>
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
 		                <span class="input-group-text input_span">Bank Number</span>
-		                <input type="text" class="form-control" id="uname" placeholder="Enter Bank Number" name="email" required>
+		                <input type="text" class="form-control" id="bankAccountNumber" placeholder="Enter Bank Number" name="bankAccountNumber" required>
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
@@ -125,10 +125,10 @@
 	        </c:when>
 	        <c:otherwise>
 	        	<h1>Manager Sign Up</h1>
-		        <form action="#" class="was-validated" method="post">
+		        <form action="ManagerRegist" class="was-validated" method="post">
 		            <div class="input-group mb-3 mt-3 input_interval">
 		                <span class="input-group-text input_span">Job</span>
-		                <select class="form-select" id="job" name="job">
+		                <select class="form-select" id="job" name="jobPosition">
 		                    <option>1.보험상품개발자</option>
 		                    <option>2.보험상품승인자</option>
 		                    <option>3.U/W</option>
@@ -151,20 +151,20 @@
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
-		                <span class="input-group-text input_span">Username</span>
-		                <input type="text" class="form-control" id="uname" placeholder="Enter Username" name="uemail" required>
+		                <span class="input-group-text input_span">User name</span>
+		                <input type="text" class="form-control" id="uname" placeholder="Enter Username" name="name" required>
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
 		                <span class="input-group-text input_span">Age</span>
-		                <input type="text" class="form-control" id="uname" placeholder="Enter Age" name="uemail" required pattern="^[0-9]+$">
+		                <input type="text" class="form-control" id="uname" placeholder="Enter Age" name="age" required pattern="^[0-9]+$">
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
 		            <div class="input-group mb-3 mt-3">
 		                <span class="input-group-text input_span">Phone Number</span>
-		                <input type="text" class="form-control" id="uname" placeholder="Enter Phone Number" name="email" required >
+		                <input type="text" class="form-control" id="uname" placeholder="Enter Phone Number" name="phoneNumber" required >
 		                <div class="valid-feedback">Valid.</div>
 		                <div class="invalid-feedback">Please fill out this field.</div>
 		            </div>
