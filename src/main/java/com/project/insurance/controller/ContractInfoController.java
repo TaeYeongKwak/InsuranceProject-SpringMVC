@@ -22,7 +22,7 @@ public class ContractInfoController {
 	public String showContractManagerContract(Model model, String clientId, String productName) {
 		try {
 			Contract contract = contractService.searchByClientIdAndProductName(clientId, productName);
-			model.addAttribute("info",contract);
+			model.addAttribute("contract",contract);
 			model.addAttribute("mode","cm");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -34,7 +34,7 @@ public class ContractInfoController {
 	public String showUnderWriteContract(Model model, String clientId, String productName) {
 		try {
 			Contract contract = contractService.searchByClientIdAndProductName(clientId, productName);
-			model.addAttribute("info",contract);
+			model.addAttribute("contract",contract);
 			model.addAttribute("mode","uw");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,7 +46,7 @@ public class ContractInfoController {
 	public String showExpiredContract(Model model, String clientId, String productName) {
 		try {
 			Contract contract = contractService.searchByClientIdAndProductName(clientId, productName);
-			model.addAttribute("info",contract);
+			model.addAttribute("contract",contract);
 			model.addAttribute("mode","expire");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class ContractInfoController {
 	public String showSalesPersonContract(Model model, String clientId, String productName) {
 		try {
 			Contract contract = contractService.searchByClientIdAndProductName(clientId, productName);
-			model.addAttribute("info",contract);
+			model.addAttribute("contract",contract);
 			model.addAttribute("mode","sp");
 		} catch (SQLException e) {
 			e.printStackTrace();
