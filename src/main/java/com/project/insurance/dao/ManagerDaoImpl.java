@@ -28,7 +28,6 @@ public class ManagerDaoImpl implements ManagerDao {
 		managersearch.setId(id);
 		managersearch.setPassword(password);
 		return sqlSession.selectOne("Manager_login", managersearch);
-
 	}
 
 	@Override

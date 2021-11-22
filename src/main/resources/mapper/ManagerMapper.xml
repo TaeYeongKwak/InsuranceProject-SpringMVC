@@ -12,10 +12,9 @@
 	</resultMap> resultMap = "ManagerReusultMap" -->
 
 	<insert id="Manager_add" parameterType="com.project.insurance.model.manager.Manager">
-		INSERT INTO mangers (name, manager_id, manager_password, age, phone_number, manager_type)
-		VALUES (#{id}, #{password}, #{name}, #{age}, #{phoneNumber}, #{ManagerType})
+		INSERT INTO managers (manager_id, manager_password, name, age, phone_number, manager_type)
+		VALUES (#{id}, #{password}, #{name}, #{age}, #{phoneNumber}, #{jobPosition})
 	</insert>
-
 
 	<delete id="Manager_delete" parameterType="com.project.insurance.model.manager.Manager">
 		DELETE FROM managers WHERE manager_id = #{id} AND manager_password = #{password}
@@ -28,8 +27,7 @@
 
 	<select id="Manager_search" parameterType="com.project.insurance.model.manager.Manager"
 	resultType = "com.project.insurance.model.manager.Manager">
-		SELECT * FROM managers WHERE manger_id = #{id}
+		SELECT * FROM managers WHERE manager_id = #{id}
 	</select>
-
 
 </mapper>

@@ -32,8 +32,8 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public Manager checkManagerID(String managerID) {
-		return managerdao.search(managerID);
+	public Manager checkManagerID(String id) {
+		return managerdao.search(id);
 	}
 
 }
