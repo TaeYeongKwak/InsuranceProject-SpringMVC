@@ -47,7 +47,7 @@
                     </div>
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-outline-primary">Login</button>
-                        <button type="button" onclick = "location.href='ClientSginUp'" class="btn btn-outline-primary">Sign Up</button>
+                        <button type="button" onclick = "location.href='ClientSignUp'" class="btn btn-outline-primary">Sign Up</button>
                     </div>
                 </form>
             </div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-outline-danger">Login</button>
-                        <button type="button" onclick = "location.href='ManagerSginUp'" class="btn btn-outline-danger">Sign Up</button>
+                        <button type="button" onclick = "location.href='ManagerSignUp'" class="btn btn-outline-danger">Sign Up</button>
                     </div>
                 </form>
             </div>

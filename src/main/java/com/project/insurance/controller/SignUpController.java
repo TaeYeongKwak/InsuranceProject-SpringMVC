@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.insurance.model.Client;
@@ -16,31 +17,29 @@ public class SignUpController {
 	@Autowired
 	private ManagerService managerService;
 	private ClientService clientService;
-	
-	@RequestMapping(value="ManagerRegist", method=RequestMethod.POST)
+
+	@RequestMapping(value = "ManagerRegist", method = RequestMethod.POST)
 	public String ManagerRegist(Manager manager) {
 		managerService.register(manager);
 		return "login";
 	}
-	
-	@RequestMapping(value="ClientRegist", method=RequestMethod.POST)
+
+	@RequestMapping(value = "ClientRegist", method = RequestMethod.POST)
 	public String ClientRegist(Client client) {
 		clientService.register(client);
 		return "login";
 	}
 
 	@ResponseBody
-	@RequestMapping(value="checkId", method=RequestMethod.GET)
-	public String checkId(String id) {
-		Manager manager = managerService.checkManagerID(id);
+	@RequestMapping(value = "checkId", method = RequestMethod.GET)
+	public String checkId(@RequestParam("mid")String managerID) {
+		System.out.println(managerID + "SignUpCON");
+		Manager manager = managerService.checkManagerID(managerID);
 		if (manager == null) {
 			return "1";
-		}else {
+		} else {
 			return "0";
 		}
 	}
-	
-}
 
-// 회원가입
-//signUp.jsp 담당
+}

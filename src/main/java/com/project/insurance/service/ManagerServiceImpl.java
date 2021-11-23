@@ -18,11 +18,6 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public Manager login(String id, String pw) {
-		return managerdao.search(id, pw);
-	}
-
-	@Override
 	public boolean delete(String id, String pw) {
 		Manager manager = managerdao.search(id, pw);
 		if (manager != null)
@@ -30,10 +25,16 @@ public class ManagerServiceImpl implements ManagerService {
 		else
 			return false;
 	}
+	
+	@Override
+	public Manager login(String id, String pw) {
+		return managerdao.search(id, pw);
+	}
 
 	@Override
-	public Manager checkManagerID(String id) {
-		return managerdao.search(id);
+	public Manager checkManagerID(String managerID) {
+		System.out.println(managerID + " service");
+		return managerdao.search(managerID);
 	}
 
 }
