@@ -21,7 +21,7 @@ public class AccidentListController {
 	}
 	
 	@RequestMapping(value="accident/list", method = RequestMethod.GET)
-	public String showList(Model model, @RequestParam("TYPE")String type) {
+	public String showList(Model model, @RequestParam("type")String type) {
 		try {
 			model.addAttribute("accidentList",
 					contractService.searchAccidentListByProductType(InsuranceProductType.valueOf(type)));

@@ -6,7 +6,7 @@ import com.project.insurance.model.Client;
 
 @Service
 public class ClientServiceImpl implements ClientService {
-
+	
 	@Override
 	public boolean register(Client client) {
 		// TODO Auto-generated method stub

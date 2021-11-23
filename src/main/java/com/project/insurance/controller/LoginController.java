@@ -18,14 +18,14 @@ public class LoginController {
 	private ManagerService managerService;
 	private ClientService clientService;
 
-	@RequestMapping(value = "ManagerSginUp", method = RequestMethod.GET)
-	public String ManagerSginUp(Model model) {
+	@RequestMapping(value = "ManagerSignUp", method = RequestMethod.GET)
+	public String ManagerSignUp(Model model) {
 		model.addAttribute("isClient", null);
 		return "signUp";
 	}
 
-	@RequestMapping(value = "ClientSginUp", method = RequestMethod.GET)
-	public String ClientSginUp(Model model) {
+	@RequestMapping(value = "ClientSignUp", method = RequestMethod.GET)
+	public String ClientSignUp(Model model) {
 		model.addAttribute("isClient", true);
 		return "signUp";
 	}

@@ -23,24 +23,19 @@
 	margin-bottom: 10%;
 	width: 800px;
 }
-
 h1 {
 	text-align: center;
 	margin: 60px;
 }
-
 .input_interval {
 	padding-bottom: 15px;
 }
-
 .input_span {
 	width: 140px;
 }
-
 .radio_group_container {
 	width: 100%;
 }
-
 .radio_item_container {
 	padding: 5px;
 	padding-left: 40px;
@@ -51,27 +46,22 @@ h1 {
 <body>
 	<script>
 		function checkMId() {
-			managerId = $("#mid").val();
-
+			const managerId = $("#mid").val();
+			console.log(managerId);
 			$.ajax({
 				url : 'checkId',
 				type : 'GET',
 				dataType : 'text',
 				contentType : 'text/plain; charset=utf-8;',
-				data : managerId,
-
+				data : {mid : managerId},
 				success : function(data) {
-					if (data == "1") {
-						console.log(data);
+					if (data == 1) {
 						alert("사용할 수 있는 아이디입니다.")
 					} else {
-						console.log(data);
 						alert("사용할 수 없는 아이디입니다.")
 					}
-
 				},
 				error : function() {
-
 				}
 			});
 		}
