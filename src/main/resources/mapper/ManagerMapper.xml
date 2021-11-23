@@ -2,4 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.insurance.dao.ManagerDao">
 	
+<!-- 	<resultMap type="managers" id="ManagerReusultMap">
+		<id column="manager_id" property="id" />
+		<result column="manager_password" property="password" />
+		<result column="name" property="name" />
+		<result column="age" property="age" />
+		<result column="phone_number" property="phone_number" />
+		<result column="manager_type" property="manager_type" />
+	</resultMap> resultMap = "ManagerReusultMap" -->
+
+	<insert id="Manager_add" parameterType="com.project.insurance.model.manager.Manager">
+		INSERT INTO managers (manager_id, manager_password, name, age, phone_number, manager_type)
+		VALUES (#{id}, #{password}, #{name}, #{age}, #{phoneNumber}, #{jobPosition})
+	</insert>
+
+	<delete id="Manager_delete" parameterType="com.project.insurance.model.manager.Manager">
+		DELETE FROM managers WHERE manager_id = #{id} AND manager_password = #{password}
+	</delete>
+
+	<select id="Manager_login" parameterType="com.project.insurance.model.manager.Manager"
+	resultType = "com.project.insurance.model.manager.Manager">
+		SELECT * FROM managers WHERE manger_id = #{id} AND manager_password = #{password}
+	</select>
+
+	<select id="Manager_search" parameterType="com.project.insurance.model.manager.Manager"
+	resultType = "com.project.insurance.model.manager.Manager">
+		SELECT * FROM managers WHERE manager_id = #{id}
+	</select>
+
 </mapper>
