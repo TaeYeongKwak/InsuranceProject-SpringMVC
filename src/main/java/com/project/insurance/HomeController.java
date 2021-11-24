@@ -9,19 +9,16 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
 	}
 	
-	@RequestMapping(value = "home", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "home";
 	}
 	
-	@RequestMapping(value = "developedInsuranceList", method = RequestMethod.GET)
-	public String developedInsuranceList() {
-		return "developedInsuranceList";
-	}
+	
 	
 }

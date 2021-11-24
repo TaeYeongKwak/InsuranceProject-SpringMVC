@@ -66,7 +66,7 @@
 					<nav class="main-menu">
 						<ul class="menu-area-main">
 							<li class="active"><a href="/">Main</a></li>
-							<li><a href="developedInsuranceList">InsuranceList</a></li>
+							<li><a href="insurance/List">InsuranceList</a></li>
 							<li><a href="#">AccidentList</a></li>
 							<li><a href="login">Login</a></li>
 							<li><a href="signUp">signUp</a></li>
@@ -108,8 +108,7 @@
 					</tbody>
 				</table>
 				<div>
-					<input type="button" value="보험설계하기" class="writeButton hover"
-						onclick="location.href='developInsurance'">
+					<a href="Design" class="btn btn-primary">보험 설계하기</a>
 				</div>
 			</div>
 		</div>
