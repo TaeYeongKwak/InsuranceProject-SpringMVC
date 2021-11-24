@@ -1,6 +1,7 @@
 package com.project.insurance.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.insurance.exception.AccidentNotFoundException;
+import com.project.insurance.model.Accident;
 import com.project.insurance.service.ContractService;
 import com.project.insurance.type.InsuranceProductType;
 
@@ -23,8 +26,9 @@ public class AccidentListController {
 	@RequestMapping(value="accident/list", method = RequestMethod.GET)
 	public String showList(Model model, @RequestParam("type")String type) {
 		try {
-			model.addAttribute("accidentList",
-					contractService.searchAccidentListByProductType(InsuranceProductType.valueOf(type)));
+			ArrayList<Accident> list = contractService.searchAccidentListByProductType(InsuranceProductType.valueOf(type));
+			if(list.size() == 0) throw new AccidentNotFoundException();
+			model.addAttribute("accidentList", list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

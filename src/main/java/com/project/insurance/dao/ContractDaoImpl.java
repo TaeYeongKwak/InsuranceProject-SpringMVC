@@ -102,26 +102,30 @@ private final SqlSession sqlSession;
 	}
 	
 	private Contract toContract(HashMap<String, String> contractMap) {
-		Contract contract = new Contract();
-		Client client = new Client();
-		client.setId(String.valueOf(contractMap.get("client_id")));
-		contract.setClient(client);
-		InsuranceProduct insuranceProduct = new InsuranceProduct();
-		insuranceProduct.setProductName(String.valueOf(contractMap.get("insurance_product_name")));
-		contract.setInsuranceProduct(insuranceProduct);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-		try {
-			contract.setInsuranceContractDate(dateFormat.parse(String.valueOf(contractMap.get("insurance_contract_date"))));
-			contract.setInsuranceExpiryDate(dateFormat.parse(String.valueOf(contractMap.get("insurance_expiry_date"))));
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if(contractMap != null) {
+			Contract contract = new Contract();
+			Client client = new Client();
+			client.setId(String.valueOf(contractMap.get("client_id")));
+			contract.setClient(client);
+			InsuranceProduct insuranceProduct = new InsuranceProduct();
+			insuranceProduct.setProductName(String.valueOf(contractMap.get("insurance_product_name")));
+			contract.setInsuranceProduct(insuranceProduct);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			try {
+				contract.setInsuranceContractDate(dateFormat.parse(String.valueOf(contractMap.get("insurance_contract_date"))));
+				contract.setInsuranceExpiryDate(dateFormat.parse(String.valueOf(contractMap.get("insurance_expiry_date"))));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			Manager manager = new Manager();
+			manager.setId(String.valueOf(contractMap.get("manager_id")));
+			contract.setSalesPerson(manager);
+			contract.setApproval(Integer.parseInt(String.valueOf(contractMap.get("approval"))) == 1? true : false);
+			contract.setMonth(this.monthBitMasking(Integer.parseInt(String.valueOf(contractMap.get("months")))));
+			return contract;
+		}else {
+			return null;
 		}
-		Manager manager = new Manager();
-		manager.setId(String.valueOf(contractMap.get("manager_id")));
-		contract.setSalesPerson(manager);
-		contract.setApproval(Integer.parseInt(String.valueOf(contractMap.get("approval"))) == 1? true : false);
-		contract.setMonth(this.monthBitMasking(Integer.parseInt(String.valueOf(contractMap.get("months")))));
-		return contract;
 	}
 	
 	private boolean[] monthBitMasking(int months) {
