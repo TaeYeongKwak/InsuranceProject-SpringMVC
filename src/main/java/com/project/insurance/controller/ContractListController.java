@@ -3,12 +3,15 @@ package com.project.insurance.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.insurance.exception.ContractNotFoundException;
 import com.project.insurance.model.Contract;
 import com.project.insurance.service.ContractService;
 import com.project.insurance.type.InsuranceProductType;
@@ -17,54 +20,17 @@ import com.project.insurance.type.InsuranceProductType;
 public class ContractListController {
 	// 계약 리스트를 보여주는 화면의 컨트롤러
 	
-	private final ContractService contractService;
+	@Autowired
+	private ContractService contractService;
 	
-	public ContractListController(ContractService contractService) {
-		this.contractService = contractService;
-	}
-	
-	@RequestMapping(value="/cm", method = RequestMethod.GET)
-	public String showContractManagerList(Model model, @RequestParam("TYPE")String type) {
+	@RequestMapping(value="/{mode}", method = RequestMethod.GET)
+	public String showContract(Model model, @RequestParam("TYPE")String type, @PathVariable String mode) {
 		try {
 			ArrayList<Contract> list = contractService.searchListByInsuranceProductType(InsuranceProductType.valueOf(type));
+			if(list.size() == 0) throw new ContractNotFoundException();
+			
 			model.addAttribute("contractList", list);
-			model.addAttribute("mode", "cm");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "contractList";
-	}
-	
-	@RequestMapping(value="/uw", method = RequestMethod.GET)
-	public String showUnderwriterList(Model model) {
-		try {
-			ArrayList<Contract> list = contractService.searchListByApproval(false);
-			model.addAttribute("contractList", list);
-			model.addAttribute("mode", "uw");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "contractList";
-	}
-	
-	@RequestMapping(value="/expire", method = RequestMethod.GET)
-	public String showExpiredList(Model model, @RequestParam("TYPE")String type) {
-		try {
-			ArrayList<Contract> list = contractService.searchListByExpiredDate(InsuranceProductType.valueOf(type));
-			model.addAttribute("contractList", list);
-			model.addAttribute("mode", "expire");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "contractList";
-	}
-	
-	@RequestMapping(value="/sp", method = RequestMethod.GET)
-	public String showSalesPersonList(Model model, String managerId) {
-		try {
-			ArrayList<Contract> list = contractService.searchListBySalesPerson(managerId);
-			model.addAttribute("contractList", list);
-			model.addAttribute("mode", "sp");
+			model.addAttribute("mode", mode);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
