@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.insurance.dao.MedicalHistoryDao">
- 
+<mapper namespace="com.project.insurance.dao.AccidentDao">
+
+	<insert id = "medicalHistory_insert" parameterMap="hashmap">
+		INSERT INTO medical_Historys(client_Id, client_cancer_career, family_cancer_career, number_of_hospitalizations, number_of_hospitalVisits) 
+		VALUES(#{clientId}, #{clientCancerCareer}, #{familyCancerCareer}, #{numberOfHospitalizations}, #{numberOfHospitalVisit});
+	</insert>
+	
+	<select id = "medicalHistory_search" parameterType="string" resultType="MedicalHistory">
+		SELECT * FROM medical_Historys WHERE client_Id = #{clientId}
+	</select>
+	
+	<update id= "medicalHistory_update" parameterType="hashmap">
+      UPDATE medical_Historys SET client_cancer_career = #{client_cancer_career}, 
+                                  family_cancer_career = #{family_cancer_career}, 
+                                  number_of_hospitalizations = #{number_of_hospitalizations}, 
+                                  number_of_hospitalVisits = #{number_of_hospitalVisits} 
+                              WHERE client_id = #{client_id}
+    </update>
+	
+
 </mapper>
