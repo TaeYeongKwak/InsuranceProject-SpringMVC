@@ -14,25 +14,28 @@ import com.project.insurance.service.ManagerService;
 
 @Controller
 public class SignUpController {
+	// 회원가입
+	// signUp.jsp 담당
+
 	@Autowired
 	private ManagerService managerService;
 	private ClientService clientService;
 
-	@RequestMapping(value = "ManagerRegist", method = RequestMethod.POST)
+	@RequestMapping(value = "manager/regist", method = RequestMethod.POST)
 	public String ManagerRegist(Manager manager) {
 		managerService.register(manager);
 		return "login";
 	}
 
-	@RequestMapping(value = "ClientRegist", method = RequestMethod.POST)
+	@RequestMapping(value = "client/regist", method = RequestMethod.POST)
 	public String ClientRegist(Client client) {
 		clientService.register(client);
 		return "login";
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "checkId", method = RequestMethod.GET)
-	public String checkId(@RequestParam("mid")String managerID) {
+	@RequestMapping(value = "manager/checkId", method = RequestMethod.GET)
+	public String checkId(@RequestParam("mid") String managerID) {
 		System.out.println(managerID + "SignUpCON");
 		Manager manager = managerService.checkManagerID(managerID);
 		if (manager == null) {
