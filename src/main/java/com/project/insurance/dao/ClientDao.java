@@ -1,15 +1,21 @@
 package com.project.insurance.dao;
 
+import java.sql.SQLException;
+
 import com.project.insurance.model.Client;
 
 public interface ClientDao {
 	
-	public boolean add(Client client); // íšŒì› ì¶”ê°€
+	public boolean add(Client client) throws SQLException; // È¸¿ø Ãß°¡
 	
-	public boolean delete(Client client); // íšŒì› ì‚­ì œ
+	public boolean delete(Client client) throws SQLException; // È¸¿ø »èÁ¦
 	
-	public Client search(String clientId); // íšŒì› ID ì¡°íšŒ
+	public Client search(String clientId) throws SQLException; // È¸¿ø ID Á¶È¸
 	
-	public Client search(String clientId, String password); // íšŒì› ì¡°íšŒ
+	public Client search(String clientId, String password) throws SQLException; // È¸¿ø Á¶È¸
 	
+	public boolean addMedicalHistory(Client client) throws SQLException; //È¸¿ø ÀÇ·á±â·Ï Ãß°¡
+	
+	public boolean modifyMedicalHistory(Client client) throws SQLException;  //È¸¿ø ÀÇ·á±â·Ï ¼öÁ¤
+
 }
