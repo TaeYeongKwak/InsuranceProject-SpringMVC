@@ -17,5 +17,6 @@ public interface ClientDao {
 	public boolean addMedicalHistory(Client client) throws SQLException; //회원 의료기록 추가
 	
 	public boolean modifyMedicalHistory(Client client) throws SQLException;  //회원 의료기록 수정
+	
 
 }

@@ -1,13 +1,15 @@
 package com.project.insurance.dao;
 
+import java.sql.SQLException;
+
 import com.project.insurance.model.MedicalHistory;
 
 public interface MedicalHistoryDao {
 	
-	public boolean add(String clientId, MedicalHistory medicalHistory); // ì˜ë£Œê¸°ë¡ ì¶”ê°€
+	public boolean add(String clientId, MedicalHistory medicalHistory) throws SQLException; // ÀÇ·á±â·Ï Ãß°¡
 	
-	public boolean update(String clientId, MedicalHistory medicalHistory); // ì˜ë£Œê¸°ë¡ ë³€ê²½
+	public boolean update(String clientId, MedicalHistory medicalHistory) throws SQLException; // ÀÇ·á±â·Ï º¯°æ
 	
-	public MedicalHistory search(String clientId); // íšŒì› ì˜ë£Œê¸°ë¡ ê²€ìƒ‰
+	public MedicalHistory search(String clientId) throws SQLException; // È¸¿ø ÀÇ·á±â·Ï °Ë»ö
 	
 }

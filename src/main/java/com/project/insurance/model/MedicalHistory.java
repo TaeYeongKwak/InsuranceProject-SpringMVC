@@ -3,14 +3,25 @@ package com.project.insurance.model;
 import com.project.insurance.type.CancerType;
 
 public class MedicalHistory {
+	private Client client;
 	private CancerType clientCancerCareer;
 	private CancerType familyCancerCareer;
 	private int numberOfHospitalizations;
 	private int numberOfHospitalVisits;
-
-	public MedicalHistory() {
-		
+	
+	public Client getClient() {
+		return client;
 	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	
+	
+	public MedicalHistory() {
+	
+	}
+	
 	public CancerType getClientCancerCareer() {
 		return clientCancerCareer;
 	}
@@ -35,4 +46,5 @@ public class MedicalHistory {
 	public void setNumberOfHospitalVisits(int numberOfHospitalVisits) {
 		this.numberOfHospitalVisits = numberOfHospitalVisits;
 	}
+	
 }

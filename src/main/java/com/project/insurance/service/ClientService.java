@@ -1,18 +1,20 @@
 package com.project.insurance.service;
 
+import java.sql.SQLException;
+
 import com.project.insurance.model.Client;
 
 public interface ClientService {
 	
-	public boolean register(Client client); // íšŒì› ê°€ì…
+	public boolean register(Client client) throws SQLException; // È¸¿ø °¡ÀÔ
 	
-	public Client login(String id, String pw); // íšŒì› ë¡œê·¸ì¸
+	public Client login(String id, String pw) throws SQLException; // È¸¿ø ·Î±×ÀÎ
 	
-	public boolean delete(String id, String pw); // íšŒì› íƒˆí‡´
+	public boolean delete(Client client) throws SQLException; // È¸¿ø Å»Åğ
 	
-	public Client checkClientID(String clientID); // íšŒì› ê°€ì…ì‹œ ID ì¤‘ë³µ ì¡°íšŒ
+	public Client checkClientID(String clientID) throws SQLException; // È¸¿ø °¡ÀÔ½Ã ID Áßº¹ Á¶È¸
 	
-	public boolean addMedicalHistory(Client clientLogin); // íšŒì› ì˜ë£Œê¸°ë¡ ì¶”ê°€
+	public boolean addMedicalHistory(Client client) throws SQLException; // È¸¿ø ÀÇ·á±â·Ï Ãß°¡
 	
-	public boolean modifyMedicalHistory(Client clientLogin); // íšŒì› ì˜ë£Œê¸°ë¡ ë³€ê²½
+	public boolean modifyMedicalHistory(Client client) throws SQLException; // È¸¿ø ÀÇ·á±â·Ï º¯°æ
 }
