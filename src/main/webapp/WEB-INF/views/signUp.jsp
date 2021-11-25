@@ -49,7 +49,7 @@ h1 {
 			const managerId = $("#mid").val();
 			console.log(managerId);
 			$.ajax({
-				url : 'checkId',
+				url : '${pageContext.request.contextPath}/manager/checkId',
 				type : 'GET',
 				dataType : 'text',
 				contentType : 'text/plain; charset=utf-8;',
@@ -70,7 +70,7 @@ h1 {
 		<c:choose>
 			<c:when test="${isClient == true}">
 				<h1>Client Sign Up</h1>
-				<form action="ClientRegist" class="was-validated" method="post">
+				<form action="${pageContext.request.contextPath}/client/regist" class="was-validated" method="post">
 					<div class="input-group mb-3 mt-3">
 						<span class="input-group-text input_span">ID</span> <input
 							type="text" class="form-control" id="id" placeholder="Enter ID"
@@ -166,7 +166,7 @@ h1 {
 			</c:when>
 			<c:otherwise>
 				<h1>Manager Sign Up</h1>
-				<form action="ManagerRegist" class="was-validated" method="post">
+				<form action="${pageContext.request.contextPath}/manager/regist" class="was-validated" method="post">
 					<div class="input-group mb-3 mt-3 input_interval">
 						<span class="input-group-text input_span">Job</span> <select
 							class="form-select" id="mjob" name="jobPosition">
