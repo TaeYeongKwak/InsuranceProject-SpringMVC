@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.insurance.dao.ClientDao">
- 
+<mapper namespace="com.project.insurance.dao.AccidentDao">
+
+	<insert id = "client_insert" parameterMap="hashmap">
+		INSERT INTO clients (client_Id, name, client_password, age, email, gender, phone_number, bank_account_number, resident_registrationNumber, address, job) 
+		VALUES(#{id}, #{name}, #{password}, #{age}, #{email}, #{gender}, #{phoneNUmber}, #{bankAccountNumber}, #{residentRegistrationNumber}, #{job});
+	</insert>
+	
+	
+	<delete id="Client_delete" parameterType="com.project.insurance.model.manager.Manager">
+		DELETE FROM clients WHERE client_id = #{id} AND client_password = #{password}
+	</delete>
+	
+	
+	<select id = "Client_search" parameterType="string" resultType="Client">
+		SELECT * FROM clients WHERE client_Id = #{id}
+	</select>
+	
+	
+	<select id = "Client_login" parameterType="string" resultType="Client">
+		SELECT * FROM clients WHERE client_id = #{id} AND client_password = #{password}
+	</select>
+	
+	
+	<insert id = "Client_insert_medicalHostory" parameterMap="hashmap">
+		INSERT INTO clients(client_Id, client_cancer_career, family_cancer_career, number_of_hospitalizations, number_of_hospitalVisits) 
+		VALUES(#{clientId}, #{clientCancerCareer}, #{familyCancerCareer}, #{numberOfHospitalizations}, #{numberOfHospitalVisit});
+	</insert>
+	
+	
+	<update id= "Client_update_medicalHistory" parameterType="hashmap">
+      UPDATE clients SET client_cancer_career = #{client_cancer_career}, 
+                                  family_cancer_career = #{family_cancer_career}, 
+                                  number_of_hospitalizations = #{number_of_hospitalizations}, 
+                                  number_of_hospitalVisits = #{number_of_hospitalVisits} 
+                              WHERE client_id = #{client_id}
+    </update>
+	
+
 </mapper>
