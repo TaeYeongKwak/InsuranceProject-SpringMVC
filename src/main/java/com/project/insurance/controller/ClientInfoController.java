@@ -21,13 +21,14 @@ public class ClientInfoController {
 	private ClientService clientService;
 	
 	 @RequestMapping(value="client/Info", method=RequestMethod.POST)
-	    public Object clientInfo(Client client, Model model, HttpServletRequest request) throws SQLException {
+	    public Object clientInfo(Client client, Model model, HttpServletRequest request) throws SQLException  {
 		 	HttpSession session = request.getSession();
 			Client Cresult = clientService.login(client.getId(), client.getPassword());
 			session.setAttribute("id", Cresult);
 			
 			if (Cresult == null) 
 				throw new ClientNotFoundException();
+			model.addAttribute("client", client);
 			
 				
 			return session.getAttribute("id");
@@ -36,3 +37,5 @@ public class ClientInfoController {
 		
 	    }
 }
+
+
