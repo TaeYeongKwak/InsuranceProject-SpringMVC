@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.ClientNotFoundException;
 import com.project.insurance.model.Client;
 import com.project.insurance.service.ClientService;
 
@@ -25,15 +26,13 @@ public class ClientInfoController {
 			Client Cresult = clientService.login(client.getId(), client.getPassword());
 			session.setAttribute("id", Cresult);
 			
-			if (Cresult != null) {
-				return "home";
-			} 
+			if (Cresult == null) 
+				throw new ClientNotFoundException();
 			
-			else {
 				
-				return session.getAttribute("id");
-			}
-
+			return session.getAttribute("id");
+			
+			
 		
 	    }
 }
