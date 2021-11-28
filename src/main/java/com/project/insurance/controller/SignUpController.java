@@ -1,5 +1,7 @@
 package com.project.insurance.controller;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,27 +17,28 @@ import com.project.insurance.service.ManagerService;
 @Controller
 public class SignUpController {
 	// 회원가입
-	//signUp.jsp 담당
-	
+	// signUp.jsp 담당
+
 	@Autowired
 	private ManagerService managerService;
+	@Autowired
 	private ClientService clientService;
 
-	@RequestMapping(value = "ManagerRegist", method = RequestMethod.POST)
+	@RequestMapping(value = "manager/regist", method = RequestMethod.POST)
 	public String ManagerRegist(Manager manager) {
 		managerService.register(manager);
 		return "login";
 	}
 
-	@RequestMapping(value = "ClientRegist", method = RequestMethod.POST)
-	public String ClientRegist(Client client) {
+	@RequestMapping(value = "client/regist", method = RequestMethod.POST)
+	public String ClientRegist(Client client) throws SQLException {
 		clientService.register(client);
 		return "login";
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "checkId", method = RequestMethod.GET)
-	public String checkId(@RequestParam("mid")String managerID) {
+	@RequestMapping(value = "manager/checkId", method = RequestMethod.GET)
+	public String checkmId(@RequestParam("mid") String managerID) {
 		System.out.println(managerID + "SignUpCON");
 		Manager manager = managerService.checkManagerID(managerID);
 		if (manager == null) {
@@ -43,6 +46,28 @@ public class SignUpController {
 		} else {
 			return "0";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "client/checkId", method = RequestMethod.GET)
+	public String checkcId(@RequestParam("cid") String clientID) {
+		System.out.println(clientID + "SignUpCON");
+		
+		try {
+	
+			Client client = clientService.checkClientID(clientID);
+			
+			if (client == null) {
+				return "1";
+			} else {
+				return "0";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }
