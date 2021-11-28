@@ -65,11 +65,12 @@
 				<div class="limit-box">
 					<nav class="main-menu">
 						<ul class="menu-area-main">
-							<li class="active"><a href="/">Main</a></li>
-							<li><a href="insurance/List">InsuranceList</a></li>
+							<li class="active"><a href="${pageContext.request.contextPath}/">Main</a></li>
+							<li><a href="${pageContext.request.contextPath}/product/List">InsuranceList</a></li>
 							<li><a href="#">AccidentList</a></li>
-							<li><a href="login">Login</a></li>
-							<li><a href="signUp">signUp</a></li>
+							<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+							<li><a href="${pageContext.request.contextPath}/ClientSignUp">client signUp</a></li>
+							<li><a href="${pageContext.request.contextPath}/ManagerSignUp">manager signUp</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -108,7 +109,7 @@
 					</tbody>
 				</table>
 				<div>
-					<a href="Design" class="btn btn-primary">보험 설계하기</a>
+					<a href="${pageContext.request.contextPath}/Design" class="btn btn-primary">보험 설계하기</a>
 				</div>
 			</div>
 		</div>

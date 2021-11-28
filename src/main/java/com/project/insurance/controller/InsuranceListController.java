@@ -19,25 +19,20 @@ import com.project.insurance.model.insurance.InsuranceProduct;
 public class InsuranceListController {
 	// 보험 리스트를 보여주는 화면의 컨트롤러
 	
-	@Autowired
-	private ClientDao clientDao;
-	
-	@Autowired
-	private InsuranceProductDao insuranceProductDao;
-	
-	@RequestMapping("/insuranceList")
-	public String insuranceList(Model model, HttpServletRequest request) {
-		String url = "";
-		HttpSession session = request.getSession();															// session을 가져와서
-		Client client = (Client) session.getAttribute("id");											// 가져온 session에서 고객 가져오기
-		if (client != null) {																				// 그래서 고객이 존재하면
-			List<InsuranceProduct> insuranceProduct = this.insuranceProductDao.searchListByApproval(true);  //승인된 것만 가져옴
-			model.addAttribute("insuranceList", insuranceProduct);				
-			url = "developedInsuranceList";																	// developedInsuranceList.jsp화면을 띄워준다.
-		} else {																							// 고객이 존재하지 않으면
-			//메세지 출력 구현하기
-			url = "login";																						// 메인 화면을 띄워준다.
-		}
-		return url;
-	}
+	/*
+	 * @Autowired private ClientDao clientDao;
+	 * 
+	 * @Autowired private InsuranceProductDao insuranceProductDao;
+	 * 
+	 * 
+	 * @RequestMapping("product/List") public String insuranceList(Model model,
+	 * HttpServletRequest request) { String url = ""; HttpSession session =
+	 * request.getSession(); // session을 가져와서 Client client = (Client)
+	 * session.getAttribute("id"); // 가져온 session에서 고객 가져오기 if (client != null) { //
+	 * 그래서 고객이 존재하면 List<InsuranceProduct> insuranceProduct =
+	 * this.insuranceProductDao.searchListByApproval(true); //승인된 것만 가져옴
+	 * model.addAttribute("product/List", insuranceProduct); url = "insuranceList";
+	 * // developedInsuranceList.jsp화면을 띄워준다. } else { // 고객이 존재하지 않으면 //메세지 출력 구현하기
+	 * url = "insuranceList";//나중에 login.jsp로 바꿔야함 // 메인 화면을 띄워준다. } return url; }
+	 */
 }
