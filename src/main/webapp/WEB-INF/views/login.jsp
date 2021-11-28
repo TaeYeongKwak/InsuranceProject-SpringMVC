@@ -35,6 +35,7 @@
 			<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
 				href="#manager_login">Manager</a></li>
 		</ul>
+
 		<div class="tab-content shadow p-4 mb-4 bg-white rounded-1">
 			<div id="client_login" class="container tab-pane active">
 				<form action="${pageContext.request.contextPath}/client/login"
@@ -77,6 +78,12 @@
 					</div>
 				</form>
 			</div>
+			
+			<div> <button type ="button" onclick = "location.href='${pageContext.request.contextPath}/email'"
+			class = "btn btn-outline-danger"> emailsend</button>>
+			
+			</div>
+			
 		</div>
 	</div>
 </body>
