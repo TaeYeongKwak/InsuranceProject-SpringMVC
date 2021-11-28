@@ -1,5 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.insurance.dao.ClientDao">
- 
+
+	<insert id = "Client_insert" parameterType="java.util.HashMap">
+		INSERT INTO clients (client_id, name, client_password, age, email, gender, phone_number, bank_account_number, resident_registrationNumber, address, job) 
+		VALUES(#{id}, #{name}, #{password}, #{age}, #{email}, #{gender}, #{phoneNumber}, #{bankAccountNumber}, #{residentRegistrationNumber}, #{address},#{job});
+	</insert>
+	
+	
+	<delete id="Client_delete" parameterType="java.util.HashMap">
+		DELETE FROM clients WHERE client_id = #{id} AND client_password = #{password}
+	</delete>
+	
+	
+	<select id = "Client_search" parameterType="string" resultType="java.util.HashMap">
+		SELECT * FROM clients WHERE client_Id = #{id}
+	</select>
+	
+	
+	<select id = "Client_login" parameterType="string" resultType="java.util.HashMap">
+		SELECT * FROM clients WHERE client_id = #{id} AND client_password = #{password}
+	</select>
+
+
 </mapper>
