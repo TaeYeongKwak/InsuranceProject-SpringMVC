@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +24,11 @@ public class AccidentListController {
 		this.contractService = contractService;
 	}
 	
-	@RequestMapping(value="accident/list", method = RequestMethod.GET)
-	public String showList(Model model, @RequestParam("type")String type) {
+	@RequestMapping(value="accident/list/{type}", method = RequestMethod.GET)
+	public String showList(Model model, @PathVariable String type) {
 		try {
 			ArrayList<Accident> list = contractService.searchAccidentListByProductType(InsuranceProductType.valueOf(type));
-			if(list.size() == 0) throw new AccidentNotFoundException();
+//			if(list.size() == 0) throw new AccidentNotFoundException();
 			model.addAttribute("accidentList", list);
 		} catch (SQLException e) {
 			e.printStackTrace();

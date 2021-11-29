@@ -12,7 +12,7 @@ public class AccidentExceptionAdvice {
 	@ExceptionHandler(AccidentNotFoundException.class)
 	public String accidentNotFound(Model model) {
 		model.addAttribute("message", "해당 사고가 존재하지 않습니다.");
-		model.addAttribute("resultPage", "home");
+		model.addAttribute("resultPage", "manager/menu");
 		return "message";
 	}
 

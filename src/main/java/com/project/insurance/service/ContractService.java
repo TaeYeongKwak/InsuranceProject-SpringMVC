@@ -21,6 +21,8 @@ public interface ContractService {
 	
 	public ArrayList<Contract> searchListByExpiredDate(InsuranceProductType insuranceProductType) throws SQLException; // 만기 계약 리스트 조회
 	
+	public ArrayList<Contract> searchListByClientId(String clientId) throws SQLException;
+	
 	public boolean deleteContract(Contract contract) throws SQLException; // 계약 삭제
 	
 	public boolean registerInsuranceProduct(Contract contract) throws SQLException; // 보험 계약

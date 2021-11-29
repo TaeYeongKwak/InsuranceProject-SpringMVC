@@ -20,7 +20,7 @@ import com.project.insurance.model.manager.Manager;
 @Repository
 public class ContractDaoImpl implements ContractDao{
 	
-private final SqlSession sqlSession;
+	private final SqlSession sqlSession;
 	
 	public ContractDaoImpl(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
@@ -82,7 +82,6 @@ private final SqlSession sqlSession;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("insuranceContractDate", new Date(contract.getInsuranceContractDate().getTime()));
 		map.put("insuranceExpiryDate", new Date(contract.getInsuranceExpiryDate().getTime()));
-		map.put("managerId", contract.getSalesPerson().getName());
 		map.put("approval", contract.isApproval()? 1:0);
 		map.put("months", this.monthBinary(contract.getMonth()));
 		map.put("clientID", contract.getClient().getId());
@@ -123,9 +122,8 @@ private final SqlSession sqlSession;
 			contract.setApproval(Integer.parseInt(String.valueOf(contractMap.get("approval"))) == 1? true : false);
 			contract.setMonth(this.monthBitMasking(Integer.parseInt(String.valueOf(contractMap.get("months")))));
 			return contract;
-		}else {
-			return null;
 		}
+		return null;
 	}
 	
 	private boolean[] monthBitMasking(int months) {

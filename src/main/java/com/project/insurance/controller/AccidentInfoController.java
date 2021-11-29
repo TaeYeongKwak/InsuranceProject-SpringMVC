@@ -22,9 +22,9 @@ public class AccidentInfoController {
 	}
 	
 	@RequestMapping(value="accident/{accident_num}", method = RequestMethod.GET)
-	public String accidentInfo(Model model, @PathVariable int accidentNum) {
+	public String accidentInfo(Model model, @PathVariable("accident_num") String accidentNum) {
 		try {
-			Accident accident = contractService.searchByAccidentNum(accidentNum);
+			Accident accident = contractService.searchByAccidentNum(Integer.parseInt(accidentNum));
 			if(accident == null) throw new AccidentNotFoundException();
 			model.addAttribute("accident", accident);
 		} catch (SQLException e) {

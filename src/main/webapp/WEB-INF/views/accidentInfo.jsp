@@ -34,6 +34,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
     <div class="info_container">
         <h2>사고 상세 정보</h2>
         <div class="input-group mb-3">
@@ -58,8 +59,7 @@
         <button class="btn btn-primary">
             보험금 지급
         </button>
-
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" onclick="history.back()">
             돌아가기
         </button>
     </div>

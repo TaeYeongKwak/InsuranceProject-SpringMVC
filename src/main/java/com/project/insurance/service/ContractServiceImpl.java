@@ -129,7 +129,7 @@ public class ContractServiceImpl implements ContractService{
 		return accidentDao.delete(accident);
 	}
 	
-	private Contract insertContractData(Contract contract){
+	private Contract insertContractData(Contract contract) throws SQLException{
 		contract.setInsuranceProduct(insuranceProductDao.search(contract.getInsuranceProduct().getProductName()));
 		Client client = clientDao.search(contract.getClient().getId());
 		MedicalHistory medicalHistory = medicalHistoryDao.search(client.getId());
@@ -143,7 +143,7 @@ public class ContractServiceImpl implements ContractService{
 		return contract;
 	}
 
-	private ArrayList<Contract> insertContractData(ArrayList<Contract> list){
+	private ArrayList<Contract> insertContractData(ArrayList<Contract> list) throws SQLException{
 		for(Contract contract : list) {
 			contract.setInsuranceProduct(insuranceProductDao.search(contract.getInsuranceProduct().getProductName()));
 			Client client = clientDao.search(contract.getClient().getId());
@@ -159,12 +159,17 @@ public class ContractServiceImpl implements ContractService{
 		return list;
 	}
 	
-	private Accident insertAccidentInfo(Accident accident) {
+	private Accident insertAccidentInfo(Accident accident) throws SQLException {
 		InsuranceProduct insuranceProduct = insuranceProductDao.search(accident.getInsuranceProduct().getProductName());
 		Client client = clientDao.search(accident.getClient().getId());
 		accident.setInsuranceProduct(insuranceProduct);
 		accident.setClient(client);
 		return accident;
+	}
+
+	@Override
+	public ArrayList<Contract> searchListByClientId(String clientId) throws SQLException {
+		return contractDao.searchByClient(clientId);
 	}
 
 }
