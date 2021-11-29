@@ -31,12 +31,12 @@ public class MedicalHistoryController {
 		 	return "medicalHistory";
 			
 	    }
-	 @RequestMapping(value="medicalHistory/Modify", method=RequestMethod.POST)
+	 @RequestMapping(value="medicalHistory/Update", method=RequestMethod.POST)
 	    public String medicalHistoryModify(Model model, HttpServletRequest request) throws SQLException  {
 		 	HttpSession session = request.getSession();	
 		 	Client client =(Client)session.getAttribute("id");
 		 	model.addAttribute("medicalHistory", client.getMedicalHistory());
 		 	
-		 	return "medicalHistoryModify";
+		 	return "medicalHistory_Update";
 			}
 }

@@ -15,7 +15,7 @@
 <fieldset>
 
 <legend>의료 기록 수정</legend>
-	<form action="medicalHistory/Modify" method="post" name="fr">
+	<form action="medicalHistory/Update" method="post" name="fr">
 		아이디 <input type="text" name="id" value="${medicalHistory.client.id }" readonly><br>
 		고객 암 병력 <input type="text" name="phoneNumber" value="${medicalHistory.clientCancerCareer } "><br>
 		가족 암 병력 <input type="text" name="email" value="${medicalHistory.familyCancerCareer } "><br>
