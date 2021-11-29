@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.insurance.dao.ClientDao">
 
-	<insert id = "Client_insert" parameterMap="com.project.insurance.model.Client">
+	<insert id = "Client_add" parameterMap="com.project.insurance.model.Client">
 		INSERT INTO clients (client_Id, name, client_password, age, email, gender, phone_number, bank_account_number, resident_registrationNumber, address, job) 
 		VALUES(#{id}, #{name}, #{password}, #{age}, #{email}, #{gender}, #{phoneNUmber}, #{bankAccountNumber}, #{residentRegistrationNumber}, #{job});
 	</insert>
@@ -23,19 +23,22 @@
 	</select>
 	
 	
-	<insert id = "Client_insert_medicalHostory" parameterMap="com.project.insurance.model.MedicalHistory">
-		INSERT INTO clients(client_Id, client_cancer_career, family_cancer_career, number_of_hospitalizations, number_of_hospitalVisits) 
-		VALUES(#{clientId}, #{clientCancerCareer}, #{familyCancerCareer}, #{numberOfHospitalizations}, #{numberOfHospitalVisit});
-	</insert>
-	
-	
-	<update id= "Client_update_medicalHistory" parameterType="com.project.insurance.model.MedicalHistory">
-      UPDATE clients SET client_cancer_career = #{client_cancer_career}, 
-                                  family_cancer_career = #{family_cancer_career}, 
-                                  number_of_hospitalizations = #{number_of_hospitalizations}, 
-                                  number_of_hospitalVisits = #{number_of_hospitalVisits} 
-                              WHERE client_id = #{client_id}
+	<update id= "Client_update_info" parameterType="com.project.insurance.model.Client"> // 고객 정보 수정 추가
+        UPDATE clients SET client_Id = #{id}, 
+                           name = #{name}, 
+                           client_password = #{password}, 
+                           age = #{age},
+                           email = #{email},
+                           gender = #{gender},
+                           phone_number = #{phoneNumber},
+                           bank_account_number = #{bankAccountNumber},
+                           resident_registrationNumber = #{residentRegistrationNumber},
+                           address = #{address},
+                           job = #{job},
+                       WHERE client_id = #{id}
     </update>
+	
+	
 	
 
 </mapper>

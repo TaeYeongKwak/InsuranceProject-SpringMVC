@@ -13,8 +13,8 @@ public interface ClientService {
 	public boolean delete(Client client) throws SQLException; // 회원 탈퇴
 	
 	public Client checkClientID(String clientID) throws SQLException; // 회원 가입시 ID 중복 조회
+		
+	public boolean modifyClientInfo(Client client) throws SQLException; // 회원 정보 수정
 	
-	public boolean addMedicalHistory(Client client) throws SQLException; // 회원 의료기록 추가
-	
-	public boolean modifyMedicalHistory(Client client) throws SQLException; // 회원 의료기록 변경
+
 }

@@ -36,15 +36,12 @@ public class ClientServiceImpl implements ClientService {
 		return clientdao.search(clientID);
 	}
 	
-
+	
 	@Override
-	public boolean addMedicalHistory(Client client) throws SQLException {
-		return clientdao.addMedicalHistory(client);
+	public boolean modifyClientInfo(Client client) throws SQLException {
+		return clientdao.modifyClientInfo(client);
 	}
 
-	@Override
-	public boolean modifyMedicalHistory(Client client) throws SQLException {
-		return clientdao.modifyMedicalHistory(client);
-	}
+
 
 }

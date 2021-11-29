@@ -92,9 +92,7 @@
         </div>
         
   
-        <button class="btn btn-primary">
-            돌아가기
-        </button>
+        <input type="button" value="Home" class="btn" onclick="location.href='home'">
     </div>
 </body>
 </html>

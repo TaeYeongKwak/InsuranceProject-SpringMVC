@@ -10,13 +10,14 @@ public interface ClientDao {
 	
 	public boolean delete(Client client) throws SQLException; // 회원 삭제
 	
-	public Client search(String clientId) throws SQLException; // 회원 ID 조회
+	public Client search(String clientId) throws SQLException; // 회원 ID 중복 조회
 	
-	public Client search(String clientId, String password) throws SQLException; // 회원 조회
+	public Client search(String clientId, String password) throws SQLException; // 회원 로그인
 	
-	public boolean addMedicalHistory(Client client) throws SQLException; //회원 의료기록 추가
+	public boolean modifyClientInfo(Client client) throws SQLException; // 회원 정보 수정
 	
-	public boolean modifyMedicalHistory(Client client) throws SQLException;  //회원 의료기록 수정
+
+	
 	
 
 }
