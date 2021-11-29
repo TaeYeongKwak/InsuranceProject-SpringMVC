@@ -47,6 +47,9 @@ public class MedicalHistoryDaoImpl implements MedicalHistoryDao{
 
 	@Override
 	public MedicalHistory search(String clientId)   throws SQLException {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("clientID", clientId);
+		
 		return sqlSession.selectOne("MedicalHistory_search", clientId);
 	}
 

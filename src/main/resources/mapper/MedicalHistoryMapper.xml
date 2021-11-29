@@ -4,7 +4,7 @@
 
 	<insert id = "medicalHistory_insert" parameterType="com.project.insurance.model.MedicalHistory">
 		INSERT INTO medical_Historys(client_Id, client_cancer_career, family_cancer_career, number_of_hospitalizations, number_of_hospitalVisits) 
-		VALUES(#{clientId}, #{clientCancerCareer}, #{familyCancerCareer}, #{numberOfHospitalizations}, #{numberOfHospitalVisit});
+		VALUES(#{id}, #{clientCancerCareer}, #{familyCancerCareer}, #{numberOfHospitalizations}, #{numberOfHospitalVisit});
 	</insert>
 	
 	<select id = "medicalHistory_search" parameterType="string"  resultType="java.util.HashMap">
