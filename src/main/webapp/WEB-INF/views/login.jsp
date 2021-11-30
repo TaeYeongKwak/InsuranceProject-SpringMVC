@@ -27,7 +27,6 @@
 </style>
 </head>
 <body>
-<<<<<<< HEAD
     <div class="login_container">
         <h1>Login</h1>
         <ul class="nav nav-tabs nav-justified " role="tablist">
@@ -74,60 +73,5 @@
             </div>
         </div>
     </div>
-=======
-	<div class="login_container">
-		<h1>Login</h1>
-		<ul class="nav nav-tabs nav-justified " role="tablist">
-			<li class="nav-item"><a class="nav-link active"
-				data-bs-toggle="tab" href="#client_login">Client</a></li>
-			<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-				href="#manager_login">Manager</a></li>
-		</ul>
-		<div class="tab-content shadow p-4 mb-4 bg-white rounded-1">
-			<div id="client_login" class="container tab-pane active">
-				<form action="${pageContext.request.contextPath}/client/login"
-					method=POST>
-					<div class="form-floating mb-3 mt-3">
-						<input type="text" class="form-control" id="email"
-							placeholder="Enter ID" name="id"> <label for="email">ID</label>
-					</div>
-					<div class="form-floating mb-3 mt-3">
-						<input type="password" class="form-control" id="pwd"
-							placeholder="Enter password" name="password"> <label
-							for="pwd">Password</label>
-					</div>
-					<div class="d-grid gap-2">
-						<button type="submit" class="btn btn-outline-primary">Login</button>
-						<button type="button"
-							onclick="location.href='${pageContext.request.contextPath}/client/signUp'"
-							class="btn btn-outline-primary">Sign Up</button>
-					</div>
-				</form>
-			</div>
-
-			<div id="manager_login" class="container tab-pane fade">
-				<form action="${pageContext.request.contextPath}/manager/login"
-					method=POST>
-					<div class="form-floating mb-3 mt-3">
-						<input type="text" class="form-control" id="email"
-							placeholder="Enter ID" name="id"> <label for="email">ID</label>
-					</div>
-					<div class="form-floating mb-3 mt-3">
-						<input type="password" class="form-control" id="pwd"
-							placeholder="Enter password" name="password"> <label
-							for="pwd">Password</label>
-					</div>
-					<div class="d-grid gap-2">
-						<button type="submit" class="btn btn-outline-danger">Login</button>
-						<button type="button"
-							onclick="location.href='${pageContext.request.contextPath}/manager/signUp'"
-							class="btn btn-outline-danger">Sign Up</button>
-					</div>
-				</form>
-			</div>
-		</div>
-
-	</div>
->>>>>>> refs/heads/Gwak
 </body>
 </html>
