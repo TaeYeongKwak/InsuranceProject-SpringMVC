@@ -257,7 +257,5 @@ h1 {
          </c:otherwise>
       </c:choose>
    </div>
->>>>>>> refs/heads/Gwak
 </body>
-
 </html>
