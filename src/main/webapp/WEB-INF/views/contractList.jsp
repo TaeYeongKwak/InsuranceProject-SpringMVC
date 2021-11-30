@@ -29,23 +29,63 @@
             text-align: center;
             margin: 30px;
         }
+        .writeButton {
+			margin-top: 10px;
+			background: #AADBFF;
+			float: right;
+			border: none;
+			height: 35px;
+			width: 130px;
+			color: #3c3c3c;
+			cursor: pointer;
+			margin-bottom: 30px;
+		}
+		.writeButton:hover {
+			background: #20c997;
+			color: #FFFFFF;
+		}
+		.row {
+			display: flex;
+		}
+		.menu {
+			width: 100%;
+			list-style: none;
+			text-align: center;
+			border-bottom: 2px solid #d49466;
+			background-color: #4B0082;
+		}
+		.menu li {
+			display: inline-block;
+			line-height: 136px;
+		}
+		.menu li a {
+			color: #d49466;
+			text-decoration: none;
+			font-size: 24px;
+			margin-right: 40px;
+		}
+		.menu li a:hover {
+			color: white;
+			font-weight: bold;
+		}
     </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
     <div class="list_container">
         <h2>계약 목록 조회</h2>
         <c:if test="${mode == 'cm' || mode == 'expire'}">
 	        <select class="form-select select_style" onchange="location.href=this.value">
-	          <option value="">실비보험</option>
-	          <option value="#2">암보험</option>
-	          <option value="#3">연금보험</option>
-	          <option value="#4">종신보험</option>
+	          <option value="${pageContext.request.contextPath}/contract/list/uw?TYPE=ACTUALEXPENSE">실비보험</option>
+	          <option value="${pageContext.request.contextPath}/contract/list/uw?TYPE=CANCER">암보험</option>
+	          <option value="${pageContext.request.contextPath}/contract/list/uw?TYPE=PENSION">연금보험</option>
+	          <option value="${pageContext.request.contextPath}/contract/list/uw?TYPE=LIFE">종신보험</option>
 	        </select>
         </c:if>
-        <table class="table table-bordered">
+        <table class="table table-hover" style="text-align: center; border: 1px solid #dddddd">
             <thead>
               <tr>
-                <th width="150px">회원이름</th>
+                <c:if test="${mode != 'client'}"><th width="150px">회원이름</th></c:if>
                 <th width="400px">보험상품명</th>
                 <th width="200px">가입날짜</th>
                 <th width="200px">승인날짜</th>
@@ -54,9 +94,9 @@
             </thead>
             <tbody>
             	<c:forEach var="contract" items="${contractList}">
-		            <tr>
-		            	<td>${contract.client.name}</td>
-		                <td>${contract.insurance.productName }</td>
+		            <tr onclick="location.href='${pageContext.request.contextPath}/contract/info/${mode}?clientId=${contract.client.id }&productName=${contract.insuranceProduct.productName}'">
+		            	<c:if test="${mode != 'client'}"><td>${contract.client.name}</td></c:if>
+		                <td>${contract.insuranceProduct.productName }</td>
 		                <td>${contract.insuranceContractDate }</td>
 		                <td>${contract.insuranceExpiryDate }</td>
 		                <td>

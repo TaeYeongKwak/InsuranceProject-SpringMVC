@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.AccidentNotFoundException;
+import com.project.insurance.model.Accident;
 import com.project.insurance.service.ContractService;
 
 @Controller
@@ -20,9 +22,11 @@ public class AccidentInfoController {
 	}
 	
 	@RequestMapping(value="accident/{accident_num}", method = RequestMethod.GET)
-	public String accidentInfo(Model model, @PathVariable int accidentNum) {
+	public String accidentInfo(Model model, @PathVariable("accident_num") String accidentNum) {
 		try {
-			model.addAttribute("accident", contractService.searchByAccidentNum(accidentNum));
+			Accident accident = contractService.searchByAccidentNum(Integer.parseInt(accidentNum));
+			if(accident == null) throw new AccidentNotFoundException();
+			model.addAttribute("accident", accident);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

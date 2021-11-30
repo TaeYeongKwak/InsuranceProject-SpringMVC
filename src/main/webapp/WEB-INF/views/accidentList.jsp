@@ -31,15 +31,38 @@
     </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
     <div class="list_container">
         <h2>사고 목록 조회</h2>
         <select class="form-select select_style" onchange="location.href=this.value">
-          <option value="#1">실비보험</option>
-          <option value="#2">암보험</option>
-          <option value="#3">연금보험</option>
-          <option value="#4">종신보험</option>
-        </select>
-        <table class="table table-bordered">
+        <c:choose>
+			<c:when test="${type == 'CANCER'}">
+				<option value="${pageContext.request.contextPath}/accident/list/CANCER" selected="selected">1.암보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/PENSION">2.연금보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/LIFE">3.종신보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/ACTUALEXPENSE">4.실비보험</option>
+			</c:when>
+			<c:when test="${type == 'PENSION'}">
+				<option value="${pageContext.request.contextPath}/accident/list/CANCER" >1.암보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/PENSION" selected="selected">2.연금보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/LIFE">3.종신보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/ACTUALEXPENSE">4.실비보험</option>
+			</c:when>
+			<c:when test="${type == 'LIFE'}">
+				<option value="${pageContext.request.contextPath}/accident/list/CANCER" >1.암보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/PENSION">2.연금보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/LIFE" selected="selected">3.종신보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/ACTUALEXPENSE">4.실비보험</option>
+			</c:when>
+			<c:when test="${type == 'ACTUALEXPENSE'}">
+				<option value="${pageContext.request.contextPath}/accident/list/CANCER" >1.암보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/PENSION">2.연금보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/LIFE">3.종신보험</option>
+				<option value="${pageContext.request.contextPath}/accident/list/ACTUALEXPENSE" selected="selected">4.실비보험</option>
+			</c:when>
+		</c:choose>
+		</select>
+        <table class="table table-hover" style="text-align: center; border: 1px solid #dddddd">
             <thead>
               <tr>
                 <th width="150px">회원이름</th>
@@ -49,9 +72,9 @@
             </thead>
             <tbody>
               <c:forEach var="accident" items="${accidentList}">
-		            <tr>
+		            <tr onclick = "location.href='${pageContext.request.contextPath}/accident/${accident.accidentNum}'">
 		            	<td>${accident.client.name}</td>
-		                <td>${accident.insurance.productName }</td>
+		                <td>${accident.insuranceProduct.productName }</td>
 		                <td>${accident.receptionDate }</td>
 		            </tr>
 	            </c:forEach>

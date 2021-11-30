@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.insurance.dao.InsuranceProductDao">
- 
+<!-- 모든 보험 조회 -->
+	<select id="insuranceProduct_selectByapproval" parameterType = "int" resultType = "java.util.HashMap">
+		select * from insurance_product where approval = #{approval}
+	</select>
+
+	<select id="insuranceProduct_selectAll" resultType = "java.util.HashMap">
+		select * from insurance_product
+	</select>
+	
+	<!-- search productName -->
+	<select id="insuranceProduct_selectOne" resultType = "java.util.HashMap">
+		select * from insurance_product where
+		insurance_product_name =
+		#{insurance_product_name}
+	</select>
+
+	<!-- 만든 보험 DB에 저장 -->
+	<insert id="insuranceProduct_add" parameterType="java.util.Map">
+		insert into
+		insurance_product
+		(insurance_product_name, basic_insurance_premium,
+		insurance_money,
+		insurance_product_type,
+		payment_cycle, payment_period, approval)
+		values(
+		#{insurance_product_name},
+		#{basic_insurance_premium},
+		#{insurance_money}, #{insurance_product_type},
+		#{payment_cycle},
+		#{payment_period}, #{approval}
+		)
+	</insert>
+
+	<!-- 보험 삭제하기 -->
+	<delete id="insuranceProduct_delete" parameterType="java.util.Map">
+		delete from insurance_product
+		where insurance_product_name =
+		#{insurance_product_name}
+	</delete>
+
+	<!-- 보험 수정하기 -->
+	<update id="insuranceProduct_update" parameterType="java.util.Map">
+		update insurance_product
+		set
+		insurance_product_name = #{insurance_product_name},
+		basic_insurance_premium = #{basic_insurance_premium},
+		insurance_money =
+		#{insurance_money},
+		payment_cycle = #{payment_cycle},
+		payment_period =
+		#{payment_period},
+		approval = #{approval}
+		where insurance_product_num =
+		#{insurance_product_num}
+	</update> 
 </mapper>

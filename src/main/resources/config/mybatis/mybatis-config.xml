@@ -20,5 +20,9 @@
 		<mapper resource="mapper/InsuranceProductMapper.xml"/>
 		<mapper resource="mapper/ManagerMapper.xml"/>
 		<mapper resource="mapper/MedicalHistoryMapper.xml"/>
+		<mapper resource="mapper/ActualExpenseMapper.xml"/>
+		<mapper resource="mapper/CancerMapper.xml"/>
+		<mapper resource="mapper/LifeMapper.xml"/>
+		<mapper resource="mapper/PensionMapper.xml"/>
 	</mappers>
 </configuration>

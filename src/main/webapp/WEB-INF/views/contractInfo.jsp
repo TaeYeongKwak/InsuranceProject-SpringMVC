@@ -32,6 +32,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
     <div class="info_container">
         <h2>계약 상세 정보</h2>
         <div class="input-group mb-3">
@@ -43,11 +44,102 @@
             <span class="input-group-text">고객나이</span>
             <div class="form-control" >${contract.client.age }</div>
         </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">회원암경력</span>
+            <div class="form-control" >${contract.client.medicalHistory.clientCancerCareer.cancerName }</div>
+        </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">가족암경력</span>
+            <div class="form-control" >${contract.client.medicalHistory.familyCancerCareer.cancerName }</div>
+        </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">입원수</span>
+            <div class="form-control" >${contract.client.medicalHistory.numberOfHospitalizations }</div>
+        </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">병원진료수</span>
+            <div class="form-control" >${contract.client.medicalHistory.numberOfHospitalVisits }</div>
+        </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text">가입한 보험</span>
             <div class="form-control" >${contract.insuranceProduct.productName }</div>
         </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">보험종류</span>
+            <div class="form-control" >${contract.insuranceProduct.insuranceProductType.insuranceName }</div>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">기본보험료</span>
+            <div class="form-control" >${contract.insuranceProduct.basicInsurancePremium }원</div>
+        </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">보험금</span>
+            <div class="form-control" >${contract.insuranceProduct.insuranceMoney }원</div>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">납입기간</span>
+            <div class="form-control" >${contract.insuranceProduct.paymentCycle }년</div>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">납입주기</span>
+            <div class="form-control" >매월 ${contract.insuranceProduct.paymentPeriod }일</div>
+        </div>
+		<c:choose>
+			<c:when test="${contract.insuranceProduct.insuranceProductType == 'ACTUALEXPENSE'}">
+				<div class="input-group mb-3">
+	            	<span class="input-group-text">자기부담금</span>
+	            	<div class="form-control" >${contract.insuranceProduct.selfPayment }원</div>
+        		</div>
+
+		        <div class="input-group mb-3">
+		            <span class="input-group-text">보장종류</span>
+		            <div class="form-control" >${contract.insuranceProduct.actualExpenseType.actualexpensename }</div>
+		        </div>
+		        
+		        <div class="input-group mb-3">
+		            <span class="input-group-text">제한나이</span>
+		            <div class="form-control" >${contract.insuranceProduct.limitAge }세</div>
+		        </div>
+		        
+		        <div class="input-group mb-3">
+		            <span class="input-group-text">보장한도</span>
+		            <div class="form-control" >${contract.insuranceProduct.limitOfIndemnity }원</div>
+		        </div>
+			</c:when>
+			<c:when test="${contract.insuranceProduct.insuranceProductType == 'CANCER'}">
+				<div class="input-group mb-3">
+		            <span class="input-group-text">제한나이</span>
+		            <div class="form-control" >${contract.insuranceProduct.limitAge }세</div>
+		        </div>
+		        
+		        <div class="input-group mb-3">
+		            <span class="input-group-text">보장종류</span>
+		            <div class="form-control" >${contract.insuranceProduct.guaranteedType.cancerName }</div>
+		        </div>
+			</c:when>
+			<c:when test="${contract.insuranceProduct.insuranceProductType == 'PENSION'}">
+			 	<div class="input-group mb-3">
+		            <span class="input-group-text">보장기간</span>
+		            <div class="form-control" >${contract.insuranceProduct.guaranteedPeriod }세</div>
+		        </div>
+			</c:when>
+			<c:when test="${contract.insuranceProduct.insuranceProductType == 'LIFE'}">
+				<div class="input-group mb-3">
+		            <span class="input-group-text">필수납입기간</span>
+		            <div class="form-control" >${contract.insuranceProduct.requiredPaymentPeriod }년</div>
+		        </div>
+			</c:when>
+		</c:choose>
 
         <div class="input-group mb-3">
             <span class="input-group-text">가입한 날짜</span>
@@ -65,9 +157,9 @@
 
         <c:choose>
         	<c:when test="${mode == 'uw'}">
-        		<button class="btn btn-primary">
+        		<a href="${pageContext.request.contextPath}/contract/underwrite?clientId=${contract.client.id}&productName=${contract.insuranceProduct.productName}" class="btn btn-primary">
 		            승인하기
-		        </button>
+		        </a>
 		        <button class="btn btn-primary">
 		            승인거절
 		        </button>
@@ -79,6 +171,17 @@
 		        <button class="btn btn-primary">
 		            돌아가기
 		        </button>
+        	</c:when>
+        	<c:when test="${mode == 'client'}">
+        		<a href="" class="btn btn-primary" >
+		            보험 해지하기
+		        </a>
+		        <a href="" class="btn btn-primary" >
+		            보험료 납부하기
+		        </a>
+		        <a href="" class="btn btn-primary" >
+		            사고 접수하기
+		        </a>
         	</c:when>
         </c:choose>
     </div>

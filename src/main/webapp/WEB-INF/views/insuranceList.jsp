@@ -59,23 +59,7 @@
 </style>
 </head>
 <body>
-	<div class="header">
-		<div class="menu">
-			<div class="menu-area">
-				<div class="limit-box">
-					<nav class="main-menu">
-						<ul class="menu-area-main">
-							<li class="active"><a href="/">Main</a></li>
-							<li><a href="developedInsuranceList">InsuranceList</a></li>
-							<li><a href="#">AccidentList</a></li>
-							<li><a href="login">Login</a></li>
-							<li><a href="signUp">signUp</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
+	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 		<div class="content">
 			<div class="row">
@@ -85,32 +69,19 @@
 						<tr>
 							<th>번호</th>
 							<th>보험명</th>
-							<th>고객이름</th>
-							<th>계약날짜</th>
-							<th>만기날짜</th>
+							<th>보험종류</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>${insuranceProduct.insuranceProductNum}</td>
-							<td>${insuranceProduct.productName}</td>
-							<td>${contract.client.name}</td>
-							<td>${contract.insuranceContractDate}</td>
-							<td>${contract.insuranceExpiryDate}</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>연금보험</td>
-							<td>둘민</td>
-							<td>2021.07.11</td>
-							<td>2021.08.13</td>
-						</tr>
+						<c:forEach var="insuranceProduct" items = "${insuranceList}">
+							<tr onclick="location.href='${pageContext.request.contextPath}/product/info/${type}?productName=${insuranceProduct.productName}'">
+								<td>${insuranceProduct.insuranceProductNum}</td>
+								<td>${insuranceProduct.productName}</td>
+								<td>${insuranceProduct.insuranceProductType.insuranceName}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
-				<div>
-					<input type="button" value="보험설계하기" class="writeButton hover"
-						onclick="location.href='developInsurance'">
-				</div>
 			</div>
 		</div>
 	</div>

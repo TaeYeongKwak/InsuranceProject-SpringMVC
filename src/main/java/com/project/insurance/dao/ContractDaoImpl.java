@@ -20,7 +20,7 @@ import com.project.insurance.model.manager.Manager;
 @Repository
 public class ContractDaoImpl implements ContractDao{
 	
-private final SqlSession sqlSession;
+	private final SqlSession sqlSession;
 	
 	public ContractDaoImpl(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
@@ -82,7 +82,6 @@ private final SqlSession sqlSession;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("insuranceContractDate", new Date(contract.getInsuranceContractDate().getTime()));
 		map.put("insuranceExpiryDate", new Date(contract.getInsuranceExpiryDate().getTime()));
-		map.put("managerId", contract.getSalesPerson().getName());
 		map.put("approval", contract.isApproval()? 1:0);
 		map.put("months", this.monthBinary(contract.getMonth()));
 		map.put("clientID", contract.getClient().getId());
@@ -102,26 +101,29 @@ private final SqlSession sqlSession;
 	}
 	
 	private Contract toContract(HashMap<String, String> contractMap) {
-		Contract contract = new Contract();
-		Client client = new Client();
-		client.setId(String.valueOf(contractMap.get("client_id")));
-		contract.setClient(client);
-		InsuranceProduct insuranceProduct = new InsuranceProduct();
-		insuranceProduct.setProductName(String.valueOf(contractMap.get("insurance_product_name")));
-		contract.setInsuranceProduct(insuranceProduct);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-		try {
-			contract.setInsuranceContractDate(dateFormat.parse(String.valueOf(contractMap.get("insurance_contract_date"))));
-			contract.setInsuranceExpiryDate(dateFormat.parse(String.valueOf(contractMap.get("insurance_expiry_date"))));
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if(contractMap != null) {
+			Contract contract = new Contract();
+			Client client = new Client();
+			client.setId(String.valueOf(contractMap.get("client_id")));
+			contract.setClient(client);
+			InsuranceProduct insuranceProduct = new InsuranceProduct();
+			insuranceProduct.setProductName(String.valueOf(contractMap.get("insurance_product_name")));
+			contract.setInsuranceProduct(insuranceProduct);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			try {
+				contract.setInsuranceContractDate(dateFormat.parse(String.valueOf(contractMap.get("insurance_contract_date"))));
+				contract.setInsuranceExpiryDate(dateFormat.parse(String.valueOf(contractMap.get("insurance_expiry_date"))));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			Manager manager = new Manager();
+			manager.setId(String.valueOf(contractMap.get("manager_id")));
+			contract.setSalesPerson(manager);
+			contract.setApproval(Integer.parseInt(String.valueOf(contractMap.get("approval"))) == 1? true : false);
+			contract.setMonth(this.monthBitMasking(Integer.parseInt(String.valueOf(contractMap.get("months")))));
+			return contract;
 		}
-		Manager manager = new Manager();
-		manager.setId(String.valueOf(contractMap.get("manager_id")));
-		contract.setSalesPerson(manager);
-		contract.setApproval(Integer.parseInt(String.valueOf(contractMap.get("approval"))) == 1? true : false);
-		contract.setMonth(this.monthBitMasking(Integer.parseInt(String.valueOf(contractMap.get("months")))));
-		return contract;
+		return null;
 	}
 	
 	private boolean[] monthBitMasking(int months) {

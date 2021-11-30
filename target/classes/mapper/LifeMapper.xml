@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.insurance.model.insurance">
+	
+	<select id="life_select" parameterType = "String" resultType = "java.util.HashMap">
+		select * from lifes where insurance_product_name = #{productName};
+	</select>
+	<!-- 2주차 추가 내용 -->
+	
+	<!-- DB에 저장 -->
+	<insert id="life_add" parameterType="java.util.Map">
+		insert into
+		lifes
+		(insurance_product_name,
+		required_payment_period)
+		values(
+		#{insurance_product_name},
+		#{required_payment_period}
+		)
+	</insert>
+	
+	<!-- 보험 삭제하기 -->
+	<delete id="life_delete" parameterType="java.util.Map">
+		delete from lifes
+		where insurance_product_name =
+		#{insurance_product_name}
+	</delete>
+
+	<!-- 보험 수정하기 -->
+	<update id="life_update" parameterType="java.util.Map">
+		update lifes
+		set
+		insurance_product_name = #{insurance_product_name},
+		required_payment_period = #{required_payment_period}
+		where insurance_product_name = #{insurance_product_name}
+	</update>
+
+</mapper>

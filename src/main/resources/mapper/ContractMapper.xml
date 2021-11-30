@@ -38,7 +38,7 @@
 	<update id="contract_update" parameterType="java.util.HashMap">
 		UPDATE contracts 
 		SET insurance_contract_date = #{insuranceContractDate}, insurance_expiry_date = #{insuranceExpiryDate}, 
-		manager_id = #{managerId}, approval = #{approval}, months = #{months}
+		approval = #{approval}, months = #{months}
 		WHERE client_id = #{clientID} AND insurance_product_name = #{insuranceProductName}
 	</update>
 
