@@ -102,7 +102,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 			Cancer cancer = (Cancer)insuranceProduct;
 			HashMap<String, String> cancerMap = new HashMap<String, String>();
 			cancerMap.put("insurance_product_name", cancer.getProductName());
-			cancerMap.put("guaranteed_type", cancer.getInsuranceProductType().toString());
+			cancerMap.put("guaranteed_type", cancer.getGuaranteedType().toString());
 			cancerMap.put("limit_age", Integer.toString(cancer.getLimitAge()));
 			result2 = sqlSession.update("cancer_update", cancerMap);
 			break;
@@ -166,6 +166,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 					actualExpense.setInsuranceProductNum(Integer.parseInt(String.valueOf(map.get("insurance_product_num"))));
 					actualExpense.setProductName(String.valueOf(map.get("insurance_product_name")));
 					actualExpense.setInsuranceMoney(Integer.parseInt(String.valueOf(map.get("insurance_money"))));
+					actualExpense.setBasicInsurancePremium(Integer.parseInt(String.valueOf(map.get("basic_insurance_premium"))));
 					actualExpense.setInsuranceProductType(type);
 					actualExpense.setPaymentCycle(Integer.parseInt(String.valueOf(map.get("payment_cycle"))));
 					actualExpense.setPaymentPeriod(Integer.parseInt(String.valueOf(map.get("payment_period"))));
@@ -181,6 +182,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 					cancer.setInsuranceProductNum(Integer.parseInt(String.valueOf(map.get("insurance_product_num"))));
 					cancer.setProductName(String.valueOf(map.get("insurance_product_name")));
 					cancer.setInsuranceMoney(Integer.parseInt(String.valueOf(map.get("insurance_money"))));
+					cancer.setBasicInsurancePremium(Integer.parseInt(String.valueOf(map.get("basic_insurance_premium"))));
 					cancer.setInsuranceProductType(type);
 					cancer.setPaymentCycle(Integer.parseInt(String.valueOf(map.get("payment_cycle"))));
 					cancer.setPaymentPeriod(Integer.parseInt(String.valueOf(map.get("payment_period"))));
@@ -194,6 +196,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 					life.setInsuranceProductNum(Integer.parseInt(String.valueOf(map.get("insurance_product_num"))));
 					life.setProductName(String.valueOf(map.get("insurance_product_name")));
 					life.setInsuranceMoney(Integer.parseInt(String.valueOf(map.get("insurance_money"))));
+					life.setBasicInsurancePremium(Integer.parseInt(String.valueOf(map.get("basic_insurance_premium"))));
 					life.setInsuranceProductType(type);
 					life.setPaymentCycle(Integer.parseInt(String.valueOf(map.get("payment_cycle"))));
 					life.setPaymentPeriod(Integer.parseInt(String.valueOf(map.get("payment_period"))));
@@ -206,6 +209,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 					pension.setInsuranceProductNum(Integer.parseInt(String.valueOf(map.get("insurance_product_num"))));
 					pension.setProductName(String.valueOf(map.get("insurance_product_name")));
 					pension.setInsuranceMoney(Integer.parseInt(String.valueOf(map.get("insurance_money"))));
+					pension.setBasicInsurancePremium(Integer.parseInt(String.valueOf(map.get("basic_insurance_premium"))));
 					pension.setInsuranceProductType(type);
 					pension.setPaymentCycle(Integer.parseInt(String.valueOf(map.get("payment_cycle"))));
 					pension.setPaymentPeriod(Integer.parseInt(String.valueOf(map.get("payment_period"))));
