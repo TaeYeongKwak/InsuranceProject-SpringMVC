@@ -132,6 +132,16 @@
 			        <input type="hidden" name = "productName" value = "${insuranceProduct.productName }">
 		       </form> 
         	</c:when>
+        	<c:when test="${type == 'manage'}">
+        		<a href = "${pageContext.request.contextPath}/product/modify/${insuranceProduct.productName}" class="btn btn-primary">
+            		수정하기
+        		</a>
+        	</c:when>
+        	<c:when test="${type == 'delete'}">
+        		<a href = "${pageContext.request.contextPath}/product/delete?productName=${insuranceProduct.productName}" class="btn btn-primary">
+            		삭제하기
+        		</a>
+        	</c:when>
         </c:choose>
     </div>
 </body>

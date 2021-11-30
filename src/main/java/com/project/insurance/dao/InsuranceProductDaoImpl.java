@@ -76,7 +76,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 	}
 
 	@Override
-	public boolean update(InsuranceProduct insuranceProduct) {//2주차 (보험타입별 구분)
+	public boolean update(InsuranceProduct insuranceProduct){//2주차 (보험타입별 구분)
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("insurance_product_num", Integer.toString(insuranceProduct.getInsuranceProductNum()));
 		map.put("insurance_product_name", insuranceProduct.getProductName());
@@ -86,7 +86,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 		map.put("payment_period", Integer.toString(insuranceProduct.getPaymentCycle()));
 		map.put("approval", Integer.toString(insuranceProduct.getApproval()));
 		int result1 = sqlSession.update("insuranceProduct_update", map);
-		int result2 = 0;
+		int result2 = 1;
 		switch(insuranceProduct.getInsuranceProductType()) {
 		case ACTUALEXPENSE:
 			ActualExpense actualExpense = (ActualExpense) insuranceProduct;
@@ -128,8 +128,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 
 	@Override
 	public boolean delete(InsuranceProduct insuranceProduct) throws SQLException {//delete문
-
-		return sqlSession.delete("delete", insuranceProduct.getProductName()) == 1 ? true : false;
+		return sqlSession.delete("insuranceProduct_delete", insuranceProduct.getProductName()) == 1 ? true : false;
 	}
 
 	@Override

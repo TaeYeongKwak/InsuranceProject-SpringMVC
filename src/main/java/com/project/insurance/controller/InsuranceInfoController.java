@@ -1,5 +1,7 @@
 package com.project.insurance.controller;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,14 +39,44 @@ public class InsuranceInfoController {
 		return "insuranceInfo";
 	}
 	
+	@RequestMapping(value = "product/info/manage", method = RequestMethod.GET)
+	public String insuranceInfoManage(Model model, String productName) {
+		InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+//		if(insuranceProduct == null) throw new InsuranceNotFoundException();
+		
+		model.addAttribute("insuranceProduct", insuranceProduct);
+		model.addAttribute("type", "manage");
+		return "insuranceInfo";
+	}
+	
+	@RequestMapping(value = "product/info/delete", method = RequestMethod.GET)
+	public String insuranceInfoDelete(Model model, String productName) {
+		InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+//		if(insuranceProduct == null) throw new InsuranceNotFoundException();
+		
+		model.addAttribute("insuranceProduct", insuranceProduct);
+		model.addAttribute("type", "delete");
+		return "insuranceInfo";
+	}
+	
 	@RequestMapping(value = "product/approval", method = RequestMethod.GET)
 	public String insuranceAcceptance(Model model, String productName) {
 		InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
-		
 		insuranceProduct.setApproval(true);
-		
 		model.addAttribute("message", insuranceProductService.modifyInsuranceProduct(insuranceProduct)? "승인에 성공하였습니다.":"승인에 실패하였습니다.");
 		model.addAttribute("resultPage", "manager/menu");
+		return "message";
+	}
+	
+	@RequestMapping(value = "product/delete", method = RequestMethod.GET)
+	public String insuranceDelete(Model model, String productName) {
+		try {
+			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+			model.addAttribute("message", insuranceProductService.deleteInsuranceProduct(insuranceProduct)? "삭제에 성공하였습니다.":"삭제에 실패하였습니다.");
+			model.addAttribute("resultPage", "manager/menu");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return "message";
 	}
 	

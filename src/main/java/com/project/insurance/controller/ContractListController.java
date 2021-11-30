@@ -9,9 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.insurance.exception.ContractNotFoundException;
 import com.project.insurance.model.Client;
@@ -41,11 +41,11 @@ public class ContractListController {
 		return "contractList";
 	}
 	
-	@RequestMapping(value="contract/list/cm", method = RequestMethod.GET)
-	public String showContractContractManager(Model model, @RequestParam("TYPE")String type) {
+	@RequestMapping(value="contract/list/cm/{type}", method = RequestMethod.GET)
+	public String showContractContractManager(Model model, @PathVariable String type) {
 		try {
 			ArrayList<Contract> list = contractService.searchListByInsuranceProductType(InsuranceProductType.valueOf(type));
-			if(list.size() == 0) throw new ContractNotFoundException();
+//			if(list.size() == 0) throw new ContractNotFoundException();
 			
 			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "cm");
@@ -55,11 +55,11 @@ public class ContractListController {
 		return "contractList";
 	}
 	
-	@RequestMapping(value="contract/list/expire", method = RequestMethod.GET)
-	public String showContractExpire(Model model, @RequestParam("TYPE")String type) {
+	@RequestMapping(value="contract/list/expire/{type}", method = RequestMethod.GET)
+	public String showContractExpire(Model model, @PathVariable String type) {
 		try {
-			ArrayList<Contract> list = contractService.searchListByInsuranceProductType(InsuranceProductType.valueOf(type));
-			if(list.size() == 0) throw new ContractNotFoundException();
+			ArrayList<Contract> list = contractService.searchListByExpiredDate(InsuranceProductType.valueOf(type));
+//			if(list.size() == 0) throw new ContractNotFoundException();
 			
 			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "expire");

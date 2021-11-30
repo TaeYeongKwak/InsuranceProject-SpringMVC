@@ -2,6 +2,7 @@ package com.project.insurance.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
@@ -83,8 +84,8 @@ public class ContractServiceImpl implements ContractService{
 	@Override
 	public ArrayList<Contract> searchListByExpiredDate(InsuranceProductType insuranceProductType) throws SQLException {
 		ArrayList<Contract> list = new ArrayList<Contract>();
-		for (Contract contract : this.searchListByApproval(true)) {
-			if (contract.getInsuranceProduct().getInsuranceProductType() == insuranceProductType)
+		for (Contract contract : this.searchListByInsuranceProductType(insuranceProductType)) {
+			if (contract.getInsuranceExpiryDate().before(new Date()) ) 
 				list.add(contract);
 		}
 		return list;

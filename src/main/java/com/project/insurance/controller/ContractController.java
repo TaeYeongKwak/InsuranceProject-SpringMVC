@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.ClientNotFoundException;
+import com.project.insurance.exception.InsuranceNotFoundException;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.Contract;
 import com.project.insurance.model.MedicalHistory;
@@ -36,6 +38,7 @@ public class ContractController {
 		try {
 			Client cresult = clientService.login(client.getId(), client.getPassword());		
 			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+			if(insuranceProduct == null) throw new InsuranceNotFoundException();
 			model.addAttribute("client", cresult);
 			model.addAttribute("insuranceProduct", insuranceProduct);
 		} catch (SQLException e) {
@@ -51,11 +54,14 @@ public class ContractController {
 			HttpSession session = request.getSession();
 			Manager salesPerson = (Manager) session.getAttribute("manager");
 			Client cresult = clientService.checkClientID(clientId);
+			if(cresult == null) throw new ClientNotFoundException();
+			
 			cresult.getMedicalHistory().setClientCancerCareer(medicalHistory.getClientCancerCareer());
 			cresult.getMedicalHistory().setFamilyCancerCareer(medicalHistory.getClientCancerCareer());
 			cresult.getMedicalHistory().setNumberOfHospitalizations(medicalHistory.getNumberOfHospitalizations());
 			cresult.getMedicalHistory().setNumberOfHospitalVisits(medicalHistory.getNumberOfHospitalVisits());
 			clientService.modifyMedicalHistory(cresult);
+			
 			boolean result = contractService.registerInsuranceProduct(this.makeContract(cresult, productName, salesPerson));
 			model.addAttribute("message", result? "보험 가입 신청에 성공하였습니다." : "보험 가입 신청에 실패하였습니다.");
 			model.addAttribute("resultPage", "manager/menu");

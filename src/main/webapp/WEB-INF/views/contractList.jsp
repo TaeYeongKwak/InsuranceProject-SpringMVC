@@ -75,12 +75,41 @@
     <div class="list_container">
         <h2>계약 목록 조회</h2>
         <c:if test="${mode == 'cm' || mode == 'expire'}">
-	        <select class="form-select select_style" onchange="location.href=this.value">
-	          <option value="${pageContext.request.contextPath}/contract/list/uw?TYPE=ACTUALEXPENSE">실비보험</option>
-	          <option value="${pageContext.request.contextPath}/contract/list/uw?TYPE=CANCER">암보험</option>
-	          <option value="${pageContext.request.contextPath}/contract/list/uw?TYPE=PENSION">연금보험</option>
-	          <option value="${pageContext.request.contextPath}/contract/list/uw?TYPE=LIFE">종신보험</option>
-	        </select>
+	        <c:choose>
+	        	<c:when test="${type == 'ACTUALEXPENSE'}">
+	        		<select class="form-select select_style" onchange="location.href=this.value">
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/ACTUALEXPENSE" selected>실비보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/CANCER">암보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/PENSION">연금보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/LIFE">종신보험</option>
+			        </select>
+	        	</c:when>
+	        	<c:when test="${type == 'CANCER'}">
+	        		<select class="form-select select_style" onchange="location.href=this.value">
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/ACTUALEXPENSE" >실비보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/CANCER" selected>암보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/PENSION">연금보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/LIFE">종신보험</option>
+			        </select>
+	        	</c:when>
+	        	<c:when test="${type == 'PENSION'}">
+	        		<select class="form-select select_style" onchange="location.href=this.value">
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/ACTUALEXPENSE" >실비보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/CANCER">암보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/PENSION" selected>연금보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/LIFE">종신보험</option>
+			        </select>
+	        	</c:when>
+	        	<c:when test="${type == 'LIFE'}">
+	        		<select class="form-select select_style" onchange="location.href=this.value">
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/ACTUALEXPENSE" >실비보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/CANCER">암보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/PENSION" >연금보험</option>
+			          <option value="${pageContext.request.contextPath}/contract/list/${mode}/LIFE" selected>종신보험</option>
+			        </select>
+	        	</c:when>
+	        
+	        </c:choose>
         </c:if>
         <table class="table table-hover" style="text-align: center; border: 1px solid #dddddd">
             <thead>

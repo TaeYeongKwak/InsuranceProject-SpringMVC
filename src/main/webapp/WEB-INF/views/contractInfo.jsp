@@ -160,15 +160,15 @@
         		<a href="${pageContext.request.contextPath}/contract/underwrite?clientId=${contract.client.id}&productName=${contract.insuranceProduct.productName}" class="btn btn-primary">
 		            승인하기
 		        </a>
-		        <button class="btn btn-primary">
+		        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/contract/delete?clientId=${contract.client.id}&productName=${contract.insuranceProduct.productName}'">
 		            승인거절
 		        </button>
         	</c:when>
         	<c:when test="${mode == 'expire'}">
-        		<button class="btn btn-primary">
+        		<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/contract/delete?clientId=${contract.client.id}&productName=${contract.insuranceProduct.productName}'">
 		            만기된 고객 삭제
 		        </button>
-		        <button class="btn btn-primary">
+		        <button class="btn btn-primary" onclick="history.back()">
 		            돌아가기
 		        </button>
         	</c:when>

@@ -79,26 +79,32 @@ h1 {
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="sign_up_container">
-		<h1>Develop Insurance Page</h1>
-		<form action="${pageContext.request.contextPath}/product/develop/<c:choose>
-						<c:when test="${type == 'CANCER'}">
-							cancer
-						</c:when>
-						<c:when test="${type == 'PENSION'}">
-							pension
-						</c:when>
-						<c:when test="${type == 'LIFE'}">
-							life
-						</c:when>
-						<c:when test="${type == 'ACTUALEXPENSE'}">
-							actualExpense
-						</c:when>
-					</c:choose>" class="was-validated" method="post">
+		<c:choose>
+			<c:when test="${insuranceProduct != null}">
+				<h1>Modify Insurance Page</h1>
+			</c:when>
+			<c:otherwise>
+				<h1>Develop Insurance Page</h1>
+			</c:otherwise>
+		</c:choose>
+		
+		<form action="${pageContext.request.contextPath}/product/
+			<c:choose>
+				<c:when test="${insuranceProduct != null}">modify</c:when>
+				<c:otherwise>develop</c:otherwise>
+			</c:choose>/
+			<c:choose>
+				<c:when test="${type == 'CANCER'}">cancer</c:when>
+				<c:when test="${type == 'PENSION'}">pension</c:when>
+				<c:when test="${type == 'LIFE'}">life</c:when>
+				<c:when test="${type == 'ACTUALEXPENSE'}">actualExpense</c:when>
+			</c:choose>" class="was-validated" method="post">
 			<div class="input-group mb-3 mt-3 input_interval">
 				<span class="input-group-text input_span">보험종류</span> 
 				<select
-					class="form-select" id="insurance" name="insuranceProductType"
-					onchange="changeForm(this.value)">
+					class="form-select" id="insurance" name="insuranceProductType" onchange="changeForm(this.value)"
+					<c:if test="${insuranceProduct != null}">disabled</c:if>
+					>
 					<c:choose>
 						<c:when test="${type == 'CANCER'}">
 							<option value="CANCER" selected="selected">1.암보험</option>
@@ -126,11 +132,16 @@ h1 {
 						</c:when>
 					</c:choose>
 				</select>
+				<c:if test="${insuranceProduct != null}">
+					<input type="hidden" name="insuranceProductNum" value="${insuranceProduct.insuranceProductNum }">
+					<input type="hidden" name="insuranceProductType" value="${insuranceProduct.insuranceProductType }">
+				</c:if>
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<span class="input-group-text input_span">보험이름</span> <input
 					type="text" class="form-control" id="productName"
-					placeholder="InsuranceName" name="productName" required>
+					placeholder="InsuranceName" name="productName" 
+					required>
 				<button class="btn btn-primary" type="button">Check Name</button>
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
@@ -166,8 +177,10 @@ h1 {
 			</div>
 			<c:choose>
 				<c:when test="${type == 'CANCER'}">
-					<div class="input-group mb-3 mt-3 input_interval">
-						<span class="input-group-text input_span">보장종류</span> <select
+				
+					<div class="input-group mb-3 mt-3 input_interval" >
+						<span class="input-group-text input_span">보장종류</span> 
+						<select
 							class="form-select" id="guaranteedType"
 							name="guaranteedType">
 							<option value="PANCREATIC">1.췌장암</option>
@@ -244,8 +257,15 @@ h1 {
 				</c:when>
 			</c:choose>
 			<div class="d-grid">
-				<input type="submit" class="btn btn-outline-primary"
-					value="Develop Insurance">
+				
+				<c:choose>
+					<c:when test="${insuranceProduct != null}">
+						<input type="submit" class="btn btn-outline-primary" value="Modify Insurance">
+					</c:when>
+					<c:otherwise>
+						<input type="submit" class="btn btn-outline-primary" value="Develop Insurance">
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</form>
 	</div>

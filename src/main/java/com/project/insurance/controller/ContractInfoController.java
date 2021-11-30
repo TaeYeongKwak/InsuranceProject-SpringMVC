@@ -49,8 +49,15 @@ public class ContractInfoController {
 		return "message";
 	}
 	
-	@RequestMapping(value = "contract/expire", method = RequestMethod.GET)
+	@RequestMapping(value = "contract/delete", method = RequestMethod.GET)
 	public String expireDelete(Model model, String clientId, String productName) {
+		try {
+			Contract contract = contractService.searchByClientIdAndProductName(clientId, productName);
+			model.addAttribute("message", contractService.deleteContract(contract)? "계약삭제가 완료되었습니다.":"계약삭제에 실패하였습니다.");
+			model.addAttribute("resultPage", "manager/menu");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return "message";
 	}
 	

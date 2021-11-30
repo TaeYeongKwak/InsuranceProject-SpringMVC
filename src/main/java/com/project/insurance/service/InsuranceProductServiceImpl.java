@@ -42,7 +42,7 @@ public class InsuranceProductServiceImpl implements InsuranceProductService {
 	}
 
 	@Override
-	public boolean modifyInsuranceProduct(InsuranceProduct insuranceProduct) {
+	public boolean modifyInsuranceProduct(InsuranceProduct insuranceProduct){
 		return insuranceProductDao.update(insuranceProduct);
 	}
 

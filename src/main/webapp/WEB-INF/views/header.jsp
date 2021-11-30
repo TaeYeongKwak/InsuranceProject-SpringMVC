@@ -41,13 +41,13 @@
 								<c:when test="${sessionScope.manager.jobPosition == 'IP'}">
 									<li class="active"><a href="${pageContext.request.contextPath}/manager/menu">Main</a></li>
 									<li><a href="${pageContext.request.contextPath}/product/design/CANCER">보험 설계하기</a></li>
-									<li><a href="#">보험 관리하기</a></li>
+									<li><a href="${pageContext.request.contextPath}/product/list/manage">보험 관리하기</a></li>
 									<li><a href="${pageContext.request.contextPath}/manager/Info">My Page</a></li>
 								</c:when>
 								<c:when test="${sessionScope.manager.jobPosition == 'IPA'}">
 									<li class="active"><a href="${pageContext.request.contextPath}/manager/menu">Main</a></li>
 									<li><a href="${pageContext.request.contextPath}/product/list/acceptance">보험 승인하기</a></li>
-									<li><a href="#">보험 삭제하기</a></li>
+									<li><a href="${pageContext.request.contextPath}/product/list/delete">보험 삭제하기</a></li>
 									<li><a href="${pageContext.request.contextPath}/manager/Info">My Page</a></li>
 								</c:when>
 								<c:when test="${sessionScope.manager.jobPosition == 'UW'}">
@@ -57,8 +57,8 @@
 								</c:when>
 								<c:when test="${sessionScope.manager.jobPosition == 'CM'}">
 									<li class="active"><a href="${pageContext.request.contextPath}/manager/menu">Main</a></li>
-									<li><a href="#">보험계약 관리하기</a></li>
-									<li><a href="#">만기계약 관리하기</a></li>
+									<li><a href="${pageContext.request.contextPath}/contract/list/cm/ACTUALEXPENSE">보험계약 관리하기</a></li>
+									<li><a href="${pageContext.request.contextPath}/contract/list/expire/ACTUALEXPENSE">만기계약 관리하기</a></li>
 									<li><a href="${pageContext.request.contextPath}/manager/Info">My Page</a></li>
 								</c:when>
 								<c:when test="${sessionScope.manager.jobPosition == 'CH'}">
@@ -68,7 +68,7 @@
 								</c:when>
 								<c:when test="${sessionScope.manager.jobPosition == 'SP'}">
 									<li class="active"><a href="${pageContext.request.contextPath}/manager/menu">Main</a></li>
-									<li><a href="#">영업 활동 관리</a></li>
+									<li><a href="${pageContext.request.contextPath}/contract/list/sp">영업 활동 관리</a></li>
 									<li><a href="${pageContext.request.contextPath}/product/list/salesperson">계약 가능한 보험목록</a></li>
 									<li><a href="${pageContext.request.contextPath}/manager/Info">My Page</a></li>
 								</c:when>

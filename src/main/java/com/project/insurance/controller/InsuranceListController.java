@@ -27,6 +27,26 @@ public class InsuranceListController {
 		return "insuranceList";
 	}
 	
+	@RequestMapping("product/list/manage")
+	public String insuranceListManage(Model model) {
+		ArrayList<InsuranceProduct> list = insuranceProductService.showInsuranceProductIsNotApproval();
+		if(list.size() == 0) throw new InsuranceNotFoundException();
+		model.addAttribute("type", "manage");
+		model.addAttribute("insuranceList", list);
+		
+		return "insuranceList";
+	}
+	
+	@RequestMapping("product/list/delete")
+	public String insuranceListDelete(Model model) {
+		ArrayList<InsuranceProduct> list = insuranceProductService.showInsuranceProductIsApproval();
+		if(list.size() == 0) throw new InsuranceNotFoundException();
+		model.addAttribute("type", "delete");
+		model.addAttribute("insuranceList", list);
+		
+		return "insuranceList";
+	}
+	
 	@RequestMapping("product/list/salesperson")
 	public String insuranceListSalesPerson(Model model) {
 		ArrayList<InsuranceProduct> list = insuranceProductService.showInsuranceProductIsApproval();
