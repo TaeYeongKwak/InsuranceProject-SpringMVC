@@ -12,6 +12,8 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>develop Insurance</title>
 <style>
 .sign_up_container {
@@ -76,14 +78,14 @@ h1 {
 	}
 	
 	function checkName(){
-		const productName = $("#productName").val();
+		const pName = $("#productName").val();
         $.ajax({
            url : '${pageContext.request.contextPath}/product/checkName',
            type : 'GET',
            dataType : 'text',
            contentType : 'text/plain; charset=utf-8;',
            data : {
-        	   productName : productName
+        	   productName : pName
            },
            success : function(data) {
               if (data == 1) {
@@ -164,7 +166,7 @@ h1 {
 				<input type="text" class="form-control" id="productName"
 					placeholder="InsuranceName" name="productName" 
 					required>
-				<button class="btn btn-primary" onclick="checkName()" >Check Name</button>
+				<input type="button" class="btn btn-primary" onclick="checkName()" value = "check name" />
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>
