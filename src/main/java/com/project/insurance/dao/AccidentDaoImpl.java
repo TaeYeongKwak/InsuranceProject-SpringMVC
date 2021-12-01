@@ -1,7 +1,6 @@
 package com.project.insurance.dao;
 
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,12 +26,11 @@ public class AccidentDaoImpl implements AccidentDao{
 
 	@Override
 	public boolean add(Accident accident) throws SQLException{
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("clientId", accident.getClient().getId());
 		map.put("insuranceProductName", accident.getInsuranceProduct().getProductName());
 		map.put("accidentDetail", accident.getAccidentDetail());
-		DateFormat dateformat = new SimpleDateFormat("yyyy-mm-dd");
-		map.put("receptionDate", dateformat.format(accident.getReceptionDate()));
+		map.put("receptionDate", accident.getReceptionDate());
 		return sqlSession.insert("accident_insert", map) == 1? true : false;
 	}
 

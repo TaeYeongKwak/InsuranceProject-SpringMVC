@@ -76,7 +76,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 	}
 
 	@Override
-	public boolean update(InsuranceProduct insuranceProduct){//2주차 (보험타입별 구분)
+	public boolean update(InsuranceProduct insuranceProduct) throws SQLException{//2주차 (보험타입별 구분)
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("insurance_product_num", Integer.toString(insuranceProduct.getInsuranceProductNum()));
 		map.put("insurance_product_name", insuranceProduct.getProductName());
@@ -132,8 +132,9 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 	}
 
 	@Override
-	public InsuranceProduct search(String productName) { //search
+	public InsuranceProduct search(String productName) throws SQLException{ //search
 		HashMap<String, String> map = sqlSession.selectOne("insuranceProduct_selectOne", productName);
+		if(map == null) return null;
 		InsuranceProductType type = InsuranceProductType.valueOf(map.get("insurance_product_type"));
 		String query = "";
 		switch(type) {
@@ -241,18 +242,13 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao{
 	
 
 	@Override
-	public ArrayList<InsuranceProduct> searchListByApproval(boolean approval) { //생각해서 다시 만들기.
+	public ArrayList<InsuranceProduct> searchListByApproval(boolean approval) throws SQLException { //생각해서 다시 만들기.
 		List<HashMap<String, String>> insuranceMapList = sqlSession.selectList("insuranceProduct_selectByapproval", approval? 1:0);
 		ArrayList<InsuranceProduct> insuranceArrayList = new ArrayList<InsuranceProduct>();
 		for(HashMap<String, String> map : insuranceMapList) {
 			insuranceArrayList.add(toProduct(map));
 		}
 		return insuranceArrayList;
-	}
-
-	@Override
-	public InsuranceProduct checkInsuranceName(String productName) {
-		return this.sqlSession.selectOne("insuranceProduct_selectOne",productName);
 	}
 
 }

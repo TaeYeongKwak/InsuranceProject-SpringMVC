@@ -1,5 +1,7 @@
 package com.project.insurance.service;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,12 @@ public class ManagerServiceImpl implements ManagerService {
 	private ManagerDao managerdao;
 
 	@Override
-	public boolean register(Manager manager) {
+	public boolean register(Manager manager) throws SQLException{
 		return managerdao.add(manager);
 	}
 
 	@Override
-	public boolean delete(String id, String pw) {
+	public boolean delete(String id, String pw) throws SQLException{
 		Manager manager = managerdao.search(id, pw);
 		if (manager != null)
 			return managerdao.delete(manager);
@@ -27,13 +29,12 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
-	public Manager login(String id, String pw) {
+	public Manager login(String id, String pw) throws SQLException{
 		return managerdao.search(id, pw);
 	}
 
 	@Override
-	public Manager checkManagerID(String managerID) {
-		System.out.println(managerID + " service");
+	public Manager checkManagerID(String managerID) throws SQLException{
 		return managerdao.search(managerID);
 	}
 

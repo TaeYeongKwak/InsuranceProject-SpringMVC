@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.ClientDataAccessException;
+import com.project.insurance.exception.ClientNotFoundException;
 import com.project.insurance.exception.ManagerNotFoundException;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.Work;
@@ -48,19 +50,21 @@ public class LoginController {
 
 	@RequestMapping(value = "manager/login", method = RequestMethod.POST)
 	public String ManagerLogin(Manager manager, Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.setAttribute("client", null);
-		Manager mresult = managerService.login(manager.getId(), manager.getPassword());
-		if (mresult == null) 
-			throw new ManagerNotFoundException();
-		
-		ArrayList<Work> workList = this.workList(mresult.getJobPosition());
-		session.setAttribute("manager", mresult);
-		
-		model.addAttribute("manager", mresult);
-		model.addAttribute("workList", workList);
+		try {
+			HttpSession session = request.getSession();
+			session.setAttribute("client", null);
+			Manager mresult = managerService.login(manager.getId(), manager.getPassword());
+			if (mresult == null) throw new ManagerNotFoundException();
+			
+			ArrayList<Work> workList = this.workList(mresult.getJobPosition());
+			session.setAttribute("manager", mresult);
+			
+			model.addAttribute("manager", mresult);
+			model.addAttribute("workList", workList);
+		} catch (SQLException e) {
+			throw new ClientDataAccessException();
+		}
 		return "menu";
-		// id, password만 넘기기
 	}
 
 	@RequestMapping(value = "client/login", method = RequestMethod.POST)
@@ -68,17 +72,15 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		session.setAttribute("manager", null);
 		Client cresult = clientService.login(client.getId(), client.getPassword());
+		if (cresult == null) throw new ClientNotFoundException();
 		
-		if (cresult != null) {
-			ArrayList<Work> workList = WorkType.CLIENT.getWorkList();
+		ArrayList<Work> workList = WorkType.CLIENT.getWorkList();
 			
-			session.setAttribute("client", cresult);
-			model.addAttribute("client", cresult);
-			model.addAttribute("workList", workList);
-			return "menu";
-		} else {
-			return "login";
-		}
+		session.setAttribute("client", cresult);
+		model.addAttribute("client", cresult);
+		model.addAttribute("workList", workList);
+		return "menu";
+		
 		// id, password만 넘기기
 	}
 	

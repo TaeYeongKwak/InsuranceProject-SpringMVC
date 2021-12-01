@@ -1,5 +1,6 @@
 package com.project.insurance.dao;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,19 +19,19 @@ public class ManagerDaoImpl implements ManagerDao {
 
 	// Manager 회원 가입
 	@Override
-	public boolean add(Manager manager) {
+	public boolean add(Manager manager) throws SQLException{
 		return sqlSession.insert("Manager_add", manager) > 0 ? true : false;
 	}
 
 	// Manager 계정 삭제
 	@Override
-	public boolean delete(Manager manager) {
+	public boolean delete(Manager manager) throws SQLException{
 		return sqlSession.delete("Manager_delete", manager) > 0 ? true : false;
 	}
 
 	// Manager 로그인
 	@Override
-	public Manager search(String id, String password) {
+	public Manager search(String id, String password) throws SQLException{
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("password", password);
@@ -40,8 +41,7 @@ public class ManagerDaoImpl implements ManagerDao {
 
 	// ManagerID 중복 검사
 	@Override
-	public Manager search(String managerID) {
-		System.out.println(managerID);
+	public Manager search(String managerID) throws SQLException{
 		HashMap<String, String> ManagerMap = sqlSession.selectOne("Manager_search", managerID);
 		return this.toManager(ManagerMap);
 	}

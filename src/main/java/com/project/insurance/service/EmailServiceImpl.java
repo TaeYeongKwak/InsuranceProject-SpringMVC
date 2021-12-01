@@ -20,7 +20,6 @@ public class EmailServiceImpl implements EmailService {
 	public void sendMail(Email dto) {
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
-			System.out.println(message);
 			
 			message.addRecipient(RecipientType.TO, new InternetAddress(dto.getReceiveMail()));
 			message.addFrom(new InternetAddress[] { new InternetAddress(dto.getSenderMail())});

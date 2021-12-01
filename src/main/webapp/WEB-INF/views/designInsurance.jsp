@@ -74,6 +74,28 @@ h1 {
 		location.href = "<c:out value="${pageContext.request.contextPath}" />"
 				+ '/product/design/' + value;
 	}
+	
+	function checkName(){
+		const productName = $("#productName").val();
+        $.ajax({
+           url : '${pageContext.request.contextPath}/product/checkName',
+           type : 'GET',
+           dataType : 'text',
+           contentType : 'text/plain; charset=utf-8;',
+           data : {
+        	   productName : productName
+           },
+           success : function(data) {
+              if (data == 1) {
+                 alert("사용할 수 있는 상품이름입니다.")
+              } else {
+                 alert("사용할 수 없는 상품이름입니다.")
+              }
+           },
+           error : function() {
+           }
+        });
+	}
 </script>
 </head>
 <body>
@@ -138,11 +160,11 @@ h1 {
 				</c:if>
 			</div>
 			<div class="input-group mb-3 mt-3">
-				<span class="input-group-text input_span">보험이름</span> <input
-					type="text" class="form-control" id="productName"
+				<span class="input-group-text input_span">보험이름</span> 
+				<input type="text" class="form-control" id="productName"
 					placeholder="InsuranceName" name="productName" 
 					required>
-				<button class="btn btn-primary" type="button">Check Name</button>
+				<button class="btn btn-primary" onclick="checkName()" >Check Name</button>
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>

@@ -12,6 +12,7 @@ import com.project.insurance.dao.ContractDao;
 import com.project.insurance.dao.InsuranceProductDao;
 import com.project.insurance.dao.ManagerDao;
 import com.project.insurance.dao.MedicalHistoryDao;
+import com.project.insurance.exception.ContractInsertFailedException;
 import com.project.insurance.model.Accident;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.Contract;
@@ -97,8 +98,13 @@ public class ContractServiceImpl implements ContractService{
 	}
 
 	@Override
-	public boolean registerInsuranceProduct(Contract contract) throws SQLException {
-		return contractDao.add(contract);
+	public boolean registerInsuranceProduct(Contract contract) {
+		try {
+			return contractDao.add(contract);
+		}catch(SQLException e) {
+			throw new ContractInsertFailedException(e);
+		}
+		
 	}
 
 	@Override

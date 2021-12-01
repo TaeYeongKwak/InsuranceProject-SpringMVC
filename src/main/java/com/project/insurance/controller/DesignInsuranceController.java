@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.insurance.exception.InsuranceDataAccessException;
 import com.project.insurance.model.insurance.ActualExpense;
 import com.project.insurance.model.insurance.Cancer;
 import com.project.insurance.model.insurance.InsuranceProduct;
@@ -28,12 +31,16 @@ public class DesignInsuranceController {
 		model.addAttribute("type", type);
 		return "designInsurance";
 	}
-	
+
 	@RequestMapping(value = "product/modify/{product_name}", method = RequestMethod.GET)
 	public String modifyInsurance(Model model, @PathVariable("product_name") String productName) {
-		InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
-		model.addAttribute("insuranceProduct", insuranceProduct);
-		model.addAttribute("type", insuranceProduct.getInsuranceProductType().toString());
+		try {
+			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+			model.addAttribute("insuranceProduct", insuranceProduct);
+			model.addAttribute("type", insuranceProduct.getInsuranceProductType().toString());
+		} catch (SQLException e) {
+			throw new InsuranceDataAccessException();
+		}
 		return "designInsurance";
 	}
 
@@ -45,7 +52,7 @@ public class DesignInsuranceController {
 			model.addAttribute("message", message);
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new InsuranceDataAccessException();
 		}
 		return "message";
 	}
@@ -58,7 +65,7 @@ public class DesignInsuranceController {
 			model.addAttribute("message", message);
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new InsuranceDataAccessException();
 		}
 		return "message";
 	}
@@ -71,7 +78,7 @@ public class DesignInsuranceController {
 			model.addAttribute("message", message);
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new InsuranceDataAccessException();
 		}
 		return "message";
 	}
@@ -84,54 +91,73 @@ public class DesignInsuranceController {
 			model.addAttribute("message", message);
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new InsuranceDataAccessException();
 		}
 		return "message";
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "product/checkName", method = RequestMethod.GET)
-	public String checkName() {
-
-		return "designInsurance";
+	public String checkName(@RequestParam String productName) {
+		try {
+			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+			if (insuranceProduct == null)
+				return "1";
+		} catch (SQLException e) {
+			throw new InsuranceDataAccessException();
+		}
+		return "0";
 	}
 
 	@RequestMapping(value = "product/modify/cancer", method = RequestMethod.POST)
 	public String modifyInsurance(Model model, Cancer cancer) {
-		boolean result = insuranceProductService.modifyInsuranceProduct(cancer);
-		String message = result ? "보험수정이 완료되었습니다." : "보험수정에 실패하였습니다.";
-		model.addAttribute("message", message);
-		model.addAttribute("resultPage", "manager/menu");
-
+		try {
+			boolean result = insuranceProductService.modifyInsuranceProduct(cancer);
+			String message = result ? "보험수정이 완료되었습니다." : "보험수정에 실패하였습니다.";
+			model.addAttribute("message", message);
+			model.addAttribute("resultPage", "manager/menu");
+		} catch (SQLException e) {
+			throw new InsuranceDataAccessException();
+		}
 		return "message";
 	}
 
 	@RequestMapping(value = "product/modify/pension", method = RequestMethod.POST)
 	public String modifyInsurance(Model model, Pension pension) {
-		boolean result = insuranceProductService.modifyInsuranceProduct(pension);
-		String message = result ? "보험수정이 완료되었습니다." : "보험수정에 실패하였습니다.";
-		model.addAttribute("message", message);
-		model.addAttribute("resultPage", "manager/menu");
-
+		try {
+			boolean result = insuranceProductService.modifyInsuranceProduct(pension);
+			String message = result ? "보험수정이 완료되었습니다." : "보험수정에 실패하였습니다.";
+			model.addAttribute("message", message);
+			model.addAttribute("resultPage", "manager/menu");
+		} catch (SQLException e) {
+			throw new InsuranceDataAccessException();
+		}
 		return "message";
 	}
 
 	@RequestMapping(value = "product/modify/life", method = RequestMethod.POST)
 	public String modifyInsurance(Model model, Life life) {
-		boolean result = insuranceProductService.modifyInsuranceProduct(life);
-		String message = result ? "보험수정이 완료되었습니다." : "보험수정에 실패하였습니다.";
-		model.addAttribute("message", message);
-		model.addAttribute("resultPage", "manager/menu");
-
+		try {
+			boolean result = insuranceProductService.modifyInsuranceProduct(life);
+			String message = result ? "보험수정이 완료되었습니다." : "보험수정에 실패하였습니다.";
+			model.addAttribute("message", message);
+			model.addAttribute("resultPage", "manager/menu");
+		} catch (SQLException e) {
+			throw new InsuranceDataAccessException();
+		}
 		return "message";
 	}
 
 	@RequestMapping(value = "product/modify/actualExpense", method = RequestMethod.POST)
 	public String modifyInsurance(Model model, ActualExpense acutalExpense) {
-		boolean result = insuranceProductService.modifyInsuranceProduct(acutalExpense);
-		String message = result ? "보험수정이 완료되었습니다." : "보험수정에 실패하였습니다.";
-		model.addAttribute("message", message);
-		model.addAttribute("resultPage", "manager/menu");
-
+		try {
+			boolean result = insuranceProductService.modifyInsuranceProduct(acutalExpense);
+			String message = result ? "보험수정이 완료되었습니다." : "보험수정에 실패하였습니다.";
+			model.addAttribute("message", message);
+			model.addAttribute("resultPage", "manager/menu");
+		} catch (SQLException e) {
+			throw new InsuranceDataAccessException();
+		}
 		return "message";
 	}
 

@@ -12,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.ClientDataAccessException;
 import com.project.insurance.exception.ClientNotFoundException;
+import com.project.insurance.exception.ContractDataAccessException;
+import com.project.insurance.exception.InsuranceDataAccessException;
 import com.project.insurance.exception.InsuranceNotFoundException;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.Contract;
@@ -42,7 +45,7 @@ public class ContractController {
 			model.addAttribute("client", cresult);
 			model.addAttribute("insuranceProduct", insuranceProduct);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new ClientDataAccessException();
 		}
 		return "medicalHistory";
 	}
@@ -66,20 +69,24 @@ public class ContractController {
 			model.addAttribute("message", result? "보험 가입 신청에 성공하였습니다." : "보험 가입 신청에 실패하였습니다.");
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new ContractDataAccessException();
 		}
 		return "message";
 	}
 	
 	private Contract makeContract(Client client, String productName, Manager manager) {
-		Contract contract = new Contract();
-		InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
-		contract.setClient(client);
-		contract.setInsuranceProduct(insuranceProduct);
-		contract.setInsuranceContractDate(new Date());
-		contract.setInsuranceExpiryDate(insuranceProduct.getPaymentPeriod());
-		contract.setSalesPerson(manager);
-		return contract;
+		try {
+			Contract contract = new Contract();
+			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+			contract.setClient(client);
+			contract.setInsuranceProduct(insuranceProduct);
+			contract.setInsuranceContractDate(new Date());
+			contract.setInsuranceExpiryDate(insuranceProduct.getPaymentPeriod());
+			contract.setSalesPerson(manager);
+			return contract;
+		} catch (SQLException e) {
+			throw new InsuranceDataAccessException();
+		}
 	}
 	
 }

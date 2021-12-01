@@ -173,13 +173,11 @@
 		        </button>
         	</c:when>
         	<c:when test="${mode == 'client'}">
-        		<a href="" class="btn btn-primary" >
-		            보험 해지하기
-		        </a>
-		        <a href="" class="btn btn-primary" >
+        		<a href='${pageContext.request.contextPath}/contract/delete?clientId=${contract.client.id}&productName=${contract.insuranceProduct.productName}' class="btn btn-primary"> 보험 해지하기 </a>
+		        <a href="${pageContext.request.contextPath}/contract/info/pay?productName=${contract.insuranceProduct.productName}" class="btn btn-primary" >
 		            보험료 납부하기
 		        </a>
-		        <a href="" class="btn btn-primary" >
+		        <a href="${pageContext.request.contextPath}/accident/apply?productName=${contract.insuranceProduct.productName}" class="btn btn-primary" >
 		            사고 접수하기
 		        </a>
         	</c:when>

@@ -21,17 +21,17 @@ public class InsuranceProductServiceImpl implements InsuranceProductService {
 //	}
 
 	@Override // 추후
-	public ArrayList<InsuranceProduct> showInsuranceProductIsApproval() {
+	public ArrayList<InsuranceProduct> showInsuranceProductIsApproval() throws SQLException{
 		return insuranceProductDao.searchListByApproval(true);
 	}
 
 	@Override // 추후
-	public ArrayList<InsuranceProduct> showInsuranceProductIsNotApproval() {
+	public ArrayList<InsuranceProduct> showInsuranceProductIsNotApproval() throws SQLException{
 		return insuranceProductDao.searchListByApproval(false);
 	}
 
 	@Override
-	public InsuranceProduct searchInsuranceProduct(String productName) {
+	public InsuranceProduct searchInsuranceProduct(String productName) throws SQLException{
 
 		return insuranceProductDao.search(productName);
 	}
@@ -42,18 +42,13 @@ public class InsuranceProductServiceImpl implements InsuranceProductService {
 	}
 
 	@Override
-	public boolean modifyInsuranceProduct(InsuranceProduct insuranceProduct){
+	public boolean modifyInsuranceProduct(InsuranceProduct insuranceProduct) throws SQLException{
 		return insuranceProductDao.update(insuranceProduct);
 	}
 
 	@Override
 	public boolean deleteInsuranceProduct(InsuranceProduct insuranceProduct) throws SQLException {
 		return insuranceProductDao.delete(insuranceProduct);
-	}
-
-	@Override
-	public InsuranceProduct checkInsuranceName(String InsuranceProductName) {
-		return null;
 	}
 
 }

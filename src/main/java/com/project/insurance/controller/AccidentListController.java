@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.AccidentDataAccessException;
 import com.project.insurance.model.Accident;
 import com.project.insurance.service.ContractService;
 import com.project.insurance.type.InsuranceProductType;
@@ -29,7 +30,7 @@ public class AccidentListController {
 //			if(list.size() == 0) throw new AccidentNotFoundException();
 			model.addAttribute("accidentList", list);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AccidentDataAccessException();
 		}
 		return "accidentList";
 	}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.ContractDataAccessException;
 import com.project.insurance.exception.ContractNotFoundException;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.Contract;
@@ -36,7 +37,7 @@ public class ContractListController {
 			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "uw");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new ContractDataAccessException();
 		}
 		return "contractList";
 	}
@@ -50,7 +51,7 @@ public class ContractListController {
 			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "cm");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new ContractDataAccessException();
 		}
 		return "contractList";
 	}
@@ -64,7 +65,7 @@ public class ContractListController {
 			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "expire");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new ContractDataAccessException();
 		}
 		return "contractList";
 	}
@@ -80,7 +81,7 @@ public class ContractListController {
 			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "sp");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new ContractDataAccessException();
 		}
 		return "contractList";
 	}
@@ -96,7 +97,7 @@ public class ContractListController {
 			model.addAttribute("contractList", list);
 			model.addAttribute("mode", "client");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new ContractDataAccessException();
 		}
 		return "contractList";
 	}
