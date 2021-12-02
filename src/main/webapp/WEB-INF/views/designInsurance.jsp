@@ -90,8 +90,14 @@ h1 {
            success : function(data) {
               if (data == 1) {
                  alert("사용할 수 있는 상품이름입니다.")
+                 var btn = document.getElementById("subBtn");
+                 btn.disabled = true;
+                 subBtn
+                 
               } else {
                  alert("사용할 수 없는 상품이름입니다.")
+                 var btn = document.getElementById("subBtn");
+                 btn.disabled = false;
               }
            },
            error : function() {
@@ -164,7 +170,7 @@ h1 {
 			<div class="input-group mb-3 mt-3">
 				<span class="input-group-text input_span">보험이름</span> 
 				<input type="text" class="form-control" id="productName"
-					placeholder="InsuranceName" name="productName" 
+					placeholder="InsuranceName" name="productName" maxlength="40"
 					required>
 				<input type="button" class="btn btn-primary" onclick="checkName()" value = "check name" />
 				<div class="valid-feedback">Valid.</div>
@@ -173,14 +179,14 @@ h1 {
 			<div class="input-group mb-3 mt-3">
 				<span class="input-group-text input_span">납입기간</span> <input
 					type="text" class="form-control" id="paymentPeriod"
-					placeholder="Enter paymentperiod" name="paymentPeriod" required>
+					placeholder="Enter paymentperiod" name="paymentPeriod" max="150" min="0" required>
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<span class="input-group-text input_span">납입주기</span> <input
 					type="text" class="form-control" id="paymentCycle"
-					placeholder="Enter paymentcycle" name="paymentCycle" required>
+					placeholder="Enter paymentcycle" name="paymentCycle" max="31" min="1" required>
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>
@@ -188,14 +194,14 @@ h1 {
 				<span class="input-group-text input_span">기본보험료</span> <input
 					type="text" class="form-control" id="basicInsurancePremium"
 					placeholder="Enter basicinsurancepremium"
-					name="basicInsurancePremium" required>
+					name="basicInsurancePremium" max="9999999999999" min="0" required>
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<span class="input-group-text input_span">보험금</span> <input
 					type="text" class="form-control" id="insuranceMoney"
-					placeholder="Enter insurancemoney" name="insuranceMoney" required>
+					placeholder="Enter insurancemoney" name="insuranceMoney" max="9999999999999" min="0" required>
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>
@@ -219,7 +225,7 @@ h1 {
 						<span class="input-group-text input_span">제한나이</span> <input
 							type="number" class="form-control" id="limitAge"
 							placeholder="Enter limitage" name="limitAge" required
-							pattern="^[0-9]+$">
+							pattern="^[0-9]+$" max="150" min="0">
 						<div class="valid-feedback">Valid.</div>
 						<div class="invalid-feedback">Please fill out this field.</div>
 					</div>
@@ -229,7 +235,7 @@ h1 {
 						<span class="input-group-text input_span">보장기간</span> <input
 							type="number" class="form-control" id="guaranteedPeriod"
 							placeholder="Enter guaranteedPeriod" name="guaranteedPeriod"
-							required pattern="^[0-9]+$">
+							required pattern="^[0-9]+$" max="150" min="0">
 						<div class="valid-feedback">Valid.</div>
 						<div class="invalid-feedback">Please fill out this field.</div>
 					</div>
@@ -239,7 +245,7 @@ h1 {
 						<span class="input-group-text input_span">필수납입기간</span> <input
 							type="number" class="form-control" id="requiredPaymentPeriod"
 							placeholder="Enter requiredPaymentPeriod" name="requiredPaymentPeriod"
-							required pattern="^[0-9]+$">
+							required pattern="^[0-9]+$" max="150" min="0">
 						<div class="valid-feedback">Valid.</div>
 						<div class="invalid-feedback">Please fill out this field.</div>
 					</div>
@@ -258,7 +264,7 @@ h1 {
 						<span class="input-group-text input_span">보장한도</span> <input
 							type="number" class="form-control" id="limitOfIndemnity"
 							placeholder="Enter limitOfIndemnity" name="limitOfIndemnity"
-							required pattern="^[0-9]+$">
+							required pattern="^[0-9]+$" max="9999999999999" min="0">
 						<div class="valid-feedback">Valid.</div>
 						<div class="invalid-feedback">Please fill out this field.</div>
 					</div>
@@ -266,7 +272,7 @@ h1 {
 						<span class="input-group-text input_span">제한나이</span> <input
 							type="number" class="form-control" id="limitAge"
 							placeholder="Enter limitage" name="limitAge" required
-							pattern="^[0-9]+$">
+							pattern="^[0-9]+$" max="150" min="0">
 						<div class="valid-feedback">Valid.</div>
 						<div class="invalid-feedback">Please fill out this field.</div>
 					</div>
@@ -274,7 +280,7 @@ h1 {
 						<span class="input-group-text input_span">자기부담금</span> <input
 							type="number" class="form-control" id="selfPayment"
 							placeholder="Enter selfPayment" name="selfPayment" required
-							pattern="^[0-9]+$">
+							pattern="^[0-9]+$" max="9999999999999" min="0">
 						<div class="valid-feedback">Valid.</div>
 						<div class="invalid-feedback">Please fill out this field.</div>
 					</div>
@@ -284,10 +290,10 @@ h1 {
 				
 				<c:choose>
 					<c:when test="${insuranceProduct != null}">
-						<input type="submit" class="btn btn-outline-primary" value="Modify Insurance">
+						<input type="submit" id="subBtn" disabled="disabled" class="btn btn-outline-primary" value="Modify Insurance">
 					</c:when>
 					<c:otherwise>
-						<input type="submit" class="btn btn-outline-primary" value="Develop Insurance">
+						<input type="submit" id="subBtn" disabled="disabled" class="btn btn-outline-primary" value="Develop Insurance">
 					</c:otherwise>
 				</c:choose>
 			</div>

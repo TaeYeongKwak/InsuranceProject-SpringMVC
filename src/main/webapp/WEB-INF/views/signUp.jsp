@@ -47,9 +47,17 @@ h1 {
    width: 50%;
 }
 </style>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
    <script>
+   	  function findAddress(){
+   		new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address").value = data.address;
+            }
+        }).open();
+   	  }
       function checkMId() {
          const managerId = $("#mid").val();
          console.log(managerId);
@@ -64,8 +72,12 @@ h1 {
             success : function(data) {
                if (data == 1) {
                   alert("사용할 수 있는 아이디입니다.")
+                  var btn = document.getElementById("mSignUpBtn");
+                  btn.disabled = false;
                } else {
                   alert("사용할 수 없는 아이디입니다.")
+                  var btn = document.getElementById("mSignUpBtn");
+                  btn.disabled = true;
                }
             },
             error : function() {
@@ -86,9 +98,13 @@ h1 {
             },
             success : function(data) {
                if (data == 1) {
-                  alert("사용할 수 있는 아이디입니다.")
+                  alert("사용할 수 있는 아이디입니다.");
+                  var btn = document.getElementById("cSignUpBtn");
+                  btn.disabled = false;
                } else {
-                  alert("사용할 수 없는 아이디입니다.")
+                  alert("사용할 수 없는 아이디입니다.");
+                  var btn = document.getElementById("cSignUpBtn");
+                  btn.disabled = true;
                }
             },
             error : function() {
@@ -96,9 +112,6 @@ h1 {
          });
       }
    </script>
-   
-   
-<jsp:include page="header.jsp"></jsp:include>
    <div class="sign_up_container">
       <c:choose>
          <c:when test="${isClient == true}">
@@ -106,38 +119,38 @@ h1 {
             <form action="${pageContext.request.contextPath}/client/regist"
                class="was-validated" method="post">
                <div class="input-group mb-3 mt-3">
-                  <span class="input-group-text input_span">ID</span> <input
-                     type="text" class="form-control" id="cid" placeholder="Enter ID"
-                     name="id" required pattern="^[a-zA-Z0-9]+$">
+                  <span class="input-group-text input_span">ID</span> 
+                  <input type="text" class="form-control" id="cid" placeholder="Enter ID"
+                     name="id" required pattern="^[a-zA-Z0-9]+$" maxlength="40">
                   <button class="btn btn-primary" type="button"
                      onclick="checkCId();">Check ID</button>
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="input-group mb-3 mt-3">
-                  <span class="input-group-text input_span">Password</span> <input
-                     type="text" class="form-control" id="password"
-                     placeholder="Enter Password" name="password" required>
+                  <span class="input-group-text input_span">Password</span> 
+                  <input type="password" class="form-control" id="password"
+                     placeholder="Enter Password" name="password" pattern="^[a-zA-Z0-9]+$" maxlength="40" required>
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">User name</span> <input
                      type="text" class="form-control" id="name"
-                     placeholder="Enter Username" name="name" required>
+                     placeholder="Enter Username" name="name" required maxlength="40">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">Age</span> <input
-                     type="text" class="form-control" id="age" placeholder="Enter Age"
-                     name="age" required pattern="^[0-9]+$">
+                     type="number" class="form-control" id="age" placeholder="Enter Age"
+                     name="age" required pattern="^[0-9]+$" max="150" min="0">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="input-group mb-3 mt-3 input_interval">
                   <span class="input-group-text input_span">Email</span> <input
-                     type="email" class="form-control" id="email"
+                     type="email" class="form-control" id="email" maxlength="40"
                      placeholder="Enter Email" name="email" required>
                </div>
                <div class="input-group mb-3 mt-3 input_interval">
@@ -166,13 +179,13 @@ h1 {
                <div class="input-group mb-3 mt-3 input_interval">
                   <span class="input-group-text input_span">Address</span> <input
                      type="text" class="form-control" id="address"
-                     placeholder="Enter Address" name="address" required>
-                  <button class="btn btn-primary" type="button">주소 찾기</button>
+                     placeholder="Enter Address" name="address" required >
+                  <button class="btn btn-primary" type="button" onclick="findAddress()">주소 찾기</button>
                </div>
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">Phone Number</span> <input
                      type="text" class="form-control" id="phoneNumber"
-                     placeholder="Enter Phone Number" name="phoneNumber" required>
+                     placeholder="Enter Phone Number" name="phoneNumber" required pattern="^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$"> 
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
@@ -180,19 +193,19 @@ h1 {
                   <span class="input-group-text input_span">Register Number</span> <input
                      type="text" class="form-control" id="residentRegistrationNumber"
                      placeholder="Enter First Regist Number"
-                     name="residentRegistrationNumber" required>
+                     name="residentRegistrationNumber" required maxlength="40">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">Bank Number</span> <input
                      type="text" class="form-control" id="bankAccountNumber"
-                     placeholder="Enter Bank Number" name="bankAccountNumber" required>
+                     placeholder="Enter Bank Number" name="bankAccountNumber" required maxlength="40">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="d-grid">
-                  <input type="submit" class="btn btn-outline-primary"
+                  <input type="submit" id="cSignUpBtn" disabled="disabled" class="btn btn-outline-primary"
                      value="Sign Up">
                </div>
             </form>
@@ -215,7 +228,7 @@ h1 {
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">ID</span> <input
                      type="text" class="form-control" id="mid" placeholder="Enter ID"
-                     name="id" required pattern="^[a-zA-Z0-9]+$">
+                     name="id" required pattern="^[a-zA-Z0-9]+$" maxlength="40">
                   <button class="btn btn-primary" type="button"
                      onclick="checkMId();">Check ID</button>
                   <div class="valid-feedback">Valid.</div>
@@ -223,34 +236,34 @@ h1 {
                </div>
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">Password</span> <input
-                     type="text" class="form-control" id="mpassword"
-                     placeholder="Enter Password" name="password" required>
+                     type="password" class="form-control" id="mpassword"
+                     placeholder="Enter Password" name="password" pattern="^[a-zA-Z0-9]+$" required maxlength="40">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">User name</span> <input
                      type="text" class="form-control" id="mname"
-                     placeholder="Enter Username" name="name" required>
+                     placeholder="Enter Username" name="name" required pattern="[ㄱ-힣]" maxlength="40">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">Age</span> <input
-                     type="text" class="form-control" id="mage"
-                     placeholder="Enter Age" name="age" required pattern="^[0-9]+$">
+                     type="number" class="form-control" id="mage"
+                     placeholder="Enter Age" name="age" required pattern="^[0-9]+$" min="0" max="150">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">Phone Number</span> <input
                      type="text" class="form-control" id="mphoneNumber"
-                     placeholder="Enter Phone Number" name="phoneNumber" required>
+                     placeholder="Enter Phone Number" name="phoneNumber" required pattern="^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>
                <div class="d-grid">
-                  <input type="submit" class="btn btn-outline-primary"
+                  <input type="submit" id="mSignUpBtn" disabled="disabled" class="btn btn-outline-primary" 
                      value="Sign Up">
                </div>
             </form>

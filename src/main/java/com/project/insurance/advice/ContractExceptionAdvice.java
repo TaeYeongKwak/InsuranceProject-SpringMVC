@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.project.insurance.exception.ContractDataAccessException;
 import com.project.insurance.exception.ContractNotFoundException;
+import com.project.insurance.exception.DuplicateContractException;
 import com.project.insurance.exception.DuplicatePayMoneyException;
 
 @ControllerAdvice
@@ -40,6 +41,13 @@ public class ContractExceptionAdvice {
 			model.addAttribute("resultPage", "manager/menu");
 		else
 			model.addAttribute("resultPage", "client/menu");
+		return "message";
+	}
+	
+	@ExceptionHandler(DuplicateContractException.class)
+	public String duplicateContract(Model model) {
+		model.addAttribute("message", "이미 해당 회원이 가입한 보험입니다.");
+		model.addAttribute("resultPage", "manager/menu");
 		return "message";
 	}
 	

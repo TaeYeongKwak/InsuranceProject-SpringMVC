@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.insurance.exception.ClientDataAccessException;
 import com.project.insurance.exception.ClientNotFoundException;
 import com.project.insurance.exception.ContractDataAccessException;
+import com.project.insurance.exception.DuplicateContractException;
 import com.project.insurance.exception.InsuranceDataAccessException;
 import com.project.insurance.exception.InsuranceNotFoundException;
 import com.project.insurance.model.Client;
@@ -39,7 +40,12 @@ public class ContractController {
 	@RequestMapping(value = "contract/login", method = RequestMethod.POST)
 	public String contractLogin(Model model, Client client, String productName) {
 		try {
-			Client cresult = clientService.login(client.getId(), client.getPassword());		
+			Client cresult = clientService.login(client.getId(), client.getPassword());
+			if(cresult == null) throw new ClientNotFoundException();
+			
+			if(contractService.searchByClientIdAndProductName(cresult.getId(), productName) != null)
+				throw new DuplicateContractException();
+			
 			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
 			if(insuranceProduct == null) throw new InsuranceNotFoundException();
 			model.addAttribute("client", cresult);

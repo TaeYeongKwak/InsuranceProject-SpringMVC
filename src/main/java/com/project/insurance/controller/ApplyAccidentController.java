@@ -43,7 +43,6 @@ public class ApplyAccidentController {
          
          accident.setClient(client);
          accident.setInsuranceProduct(insuranceProduct);
-         accident.getAccidentDetail();
          accident.setReceptionDate(new Date());
          
          boolean result = contractService.addApplyAccidentList(accident);

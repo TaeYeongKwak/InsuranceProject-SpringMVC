@@ -68,11 +68,6 @@ h2 {
 				<span class="input-group-text">관리자 전화 번호</span>
 				<div class="form-control">${managerInfo.phoneNumber}</div>
 			</div>
-
-			<button class="btn btn-primary" class="btn"
-				onclick="history.back(); return false;">돌아가기</button>
-			<button class="btn btn-primary" class="btn"
-				onclick="#">내용 수정하기</button>
 		</div>
 	</form>
 </body>

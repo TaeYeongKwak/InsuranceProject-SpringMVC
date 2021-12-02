@@ -34,4 +34,11 @@ public class AccidentInfoController {
 		return "accidentInfo";
 	}
 	
+	@RequestMapping(value="product/pay", method = RequestMethod.GET)
+	public String payInsurancePremium(Model model) {
+		model.addAttribute("message", "보험료 지급이 완료되었습니다.");
+		model.addAttribute("resultPage", "manager/menu");
+		return "message";
+	}
+	
 }

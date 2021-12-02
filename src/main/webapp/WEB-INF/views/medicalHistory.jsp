@@ -143,6 +143,7 @@ h2 {
 					<option value="COLORECTAL">4.대장암</option>
 					<option value="LIVER">5.간암</option>
 					<option value="ETC">6.기타</option>
+					<option value="HEALTHY">7.건강</option>
 				</select>
 			</div>
 	

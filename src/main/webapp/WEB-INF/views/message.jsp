@@ -7,10 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Message</title>
-
 </head>
-
-<body>p
+<body>
 </body>
 
 <script>

@@ -41,11 +41,11 @@
             <div id="client_login" class="container tab-pane active">
                 <form action = "${pageContext.request.contextPath}/client/login" method = POST>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" id="email" placeholder="Enter ID" name="id">
+                        <input type="text" class="form-control" id="email" placeholder="Enter ID" name="id" maxlength="40">
                         <label for="email">ID</label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" maxlength="40">
                         <label for="pwd">Password</label>
                     </div>
                     <div class="d-grid gap-2">
@@ -58,11 +58,11 @@
             <div id="manager_login" class="container tab-pane fade">
                 <form action = "${pageContext.request.contextPath}/manager/login" method = POST>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" id="email" placeholder="Enter ID" name="id">
+                        <input type="text" class="form-control" id="email" placeholder="Enter ID" name="id" maxlength="40">
                         <label for="email">ID</label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" maxlength="40">
                         <label for="pwd">Password</label>
                     </div>
                     <div class="d-grid gap-2">
