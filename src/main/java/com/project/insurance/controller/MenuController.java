@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.ClientSessionExpiredException;
+import com.project.insurance.exception.ManagerSessionExpiredException;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.Work;
 import com.project.insurance.model.manager.Manager;
@@ -24,6 +26,8 @@ public class MenuController {
 	public String managerMenu(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Manager mresult = (Manager) session.getAttribute("manager");
+		if(mresult == null) throw new ManagerSessionExpiredException();
+		
 		ArrayList<Work> workList = this.workList(mresult.getJobPosition());
 		model.addAttribute("manager", mresult);
 		model.addAttribute("workList", workList);
@@ -34,6 +38,8 @@ public class MenuController {
 	public String clientMenu(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Client cresult = (Client) session.getAttribute("client");
+		if(cresult == null) throw new ClientSessionExpiredException();
+		
 		ArrayList<Work> workList = WorkType.CLIENT.getWorkList();
 		model.addAttribute("client", cresult);
 		model.addAttribute("workList", workList);

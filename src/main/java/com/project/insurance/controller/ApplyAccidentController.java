@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.insurance.exception.AccidentDataAccessException;
+import com.project.insurance.exception.ClientSessionExpiredException;
+import com.project.insurance.exception.InsuranceNotFoundException;
 import com.project.insurance.model.Accident;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.insurance.InsuranceProduct;
@@ -38,8 +40,11 @@ public class ApplyAccidentController {
       try {
          insuranceProductService.searchInsuranceProduct(productName);
          InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName); 
+         if(insuranceProduct == null) throw new InsuranceNotFoundException();
+         
          HttpSession session = request.getSession();
          Client client = (Client) session.getAttribute("client");
+         if(client == null) throw new ClientSessionExpiredException();
          
          accident.setClient(client);
          accident.setInsuranceProduct(insuranceProduct);

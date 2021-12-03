@@ -2,6 +2,7 @@ package com.project.insurance.controller;
 
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +17,8 @@ import com.project.insurance.service.ContractService;
 @Controller
 public class AccidentInfoController {
 	//사고 기록을 보여주는 화면의 컨트롤러
-	private final ContractService contractService;
-	
-	public AccidentInfoController(ContractService contractService) {
-		this.contractService = contractService;
-	}
+	@Autowired
+	private ContractService contractService;
 	
 	@RequestMapping(value="accident/{accident_num}", method = RequestMethod.GET)
 	public String accidentInfo(Model model, @PathVariable("accident_num") String accidentNum) {
@@ -34,10 +32,17 @@ public class AccidentInfoController {
 		return "accidentInfo";
 	}
 	
-	@RequestMapping(value="product/pay", method = RequestMethod.GET)
-	public String payInsurancePremium(Model model) {
-		model.addAttribute("message", "보험료 지급이 완료되었습니다.");
-		model.addAttribute("resultPage", "manager/menu");
+	@RequestMapping(value="product/pay/{accident_num}", method = RequestMethod.GET)
+	public String payInsurancePremium(Model model, @PathVariable("accident_num") String accidentNum) {
+		try {
+			Accident accident = contractService.searchByAccidentNum(Integer.parseInt(accidentNum));
+			if(accident == null) throw new AccidentNotFoundException();
+			
+			model.addAttribute("message", contractService.deleteAccidentList(accident)? "보험료 지급이 완료되었습니다." : "보험료 지급에 실패하였습니다.");
+			model.addAttribute("resultPage", "manager/menu");
+		} catch (SQLException e) {
+			throw new AccidentDataAccessException();
+		}
 		return "message";
 	}
 	

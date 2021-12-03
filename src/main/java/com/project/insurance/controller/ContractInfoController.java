@@ -28,8 +28,7 @@ public class ContractInfoController {
 	public String showContract(Model model, String clientId, String productName, @PathVariable String mode) {
 		try {
 			Contract contract = contractService.searchByClientIdAndProductName(clientId, productName);
-			if (contract == null)
-				throw new ContractNotFoundException();
+			if (contract == null) throw new ContractNotFoundException();
 
 			model.addAttribute("contract", contract);
 			model.addAttribute("mode", mode);
@@ -43,6 +42,7 @@ public class ContractInfoController {
 	public String underwrite(Model model, String clientId, String productName) {
 		try {
 			Contract contract = contractService.searchByClientIdAndProductName(clientId, productName);
+			if(contract == null) throw new ContractNotFoundException();
 			contract.setApproval(true);
 
 			model.addAttribute("message", contractService.modifyContract(contract) ? "승인이 완료되었습니다." : "승인에 실패하였습니다.");

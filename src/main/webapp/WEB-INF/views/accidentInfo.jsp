@@ -56,7 +56,7 @@
             ${accident.accidentDetail }
         </div>
         
-        <button class="btn btn-primary" onclick="${${pageContext.request.contextPath}}/product/pay">
+        <button type = "button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/product/pay/${accident.accidentNum}'">
             보험금 지급
         </button>
         <button class="btn btn-primary" onclick="history.back()">

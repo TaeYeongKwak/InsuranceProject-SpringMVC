@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.ClientSessionExpiredException;
 import com.project.insurance.exception.ContractDataAccessException;
 import com.project.insurance.exception.ContractNotFoundException;
+import com.project.insurance.exception.ManagerSessionExpiredException;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.Contract;
 import com.project.insurance.model.manager.Manager;
@@ -75,6 +77,8 @@ public class ContractListController {
 		try {
 			HttpSession session = request.getSession();
 			Manager salesPerson = (Manager) session.getAttribute("manager");
+			if(salesPerson == null) throw new ManagerSessionExpiredException();
+			
 			ArrayList<Contract> list = contractService.searchListBySalesPerson(salesPerson.getId());
 			if(list.size() == 0) throw new ContractNotFoundException();
 			
@@ -91,6 +95,8 @@ public class ContractListController {
 		try {
 			HttpSession session = request.getSession();
 			Client client = (Client) session.getAttribute("client");
+			if(client == null) throw new ClientSessionExpiredException();
+			
 			ArrayList<Contract> list = contractService.searchListByClientId(client.getId());
 			if(list.size() == 0) throw new ContractNotFoundException();
 			

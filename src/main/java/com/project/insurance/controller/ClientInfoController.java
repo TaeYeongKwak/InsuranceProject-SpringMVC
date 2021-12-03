@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.insurance.exception.ClientSessionExpiredException;
 import com.project.insurance.model.Client;
 
 @Controller
@@ -19,17 +20,10 @@ public class ClientInfoController {
 	public String clientInfo(Model model, HttpServletRequest request) throws SQLException {
 		HttpSession session = request.getSession();
 		Client client = (Client) session.getAttribute("client");
+		if(client == null) throw new ClientSessionExpiredException();
+		
 		model.addAttribute("clientInfo", client);
-
 		return "clientInfo";
 	}
 
-	@RequestMapping(value = "client/info/modify", method = RequestMethod.POST)
-	public String clientModifyInfo(Model model, HttpServletRequest request) throws SQLException {
-		HttpSession session = request.getSession();
-		Client client = (Client) session.getAttribute("client");
-		model.addAttribute("clientInfo", client);
-
-		return "clientModifyInfo";
-	}
 }

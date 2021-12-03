@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.insurance.exception.InsuranceDataAccessException;
+import com.project.insurance.exception.InsuranceNotFoundException;
 import com.project.insurance.model.insurance.InsuranceProduct;
 import com.project.insurance.service.InsuranceProductService;
 
@@ -79,7 +80,10 @@ public class InsuranceInfoController {
 	public String insuranceAcceptance(Model model, String productName) {
 		try {
 			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+			if(insuranceProduct == null) throw new InsuranceNotFoundException();
+			
 			insuranceProduct.setApproval(true);
+			
 			model.addAttribute("message", insuranceProductService.modifyInsuranceProduct(insuranceProduct)? "승인에 성공하였습니다.":"승인에 실패하였습니다.");
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
@@ -92,6 +96,8 @@ public class InsuranceInfoController {
 	public String insuranceDelete(Model model, String productName) {
 		try {
 			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+			if(insuranceProduct == null) throw new InsuranceNotFoundException();
+			
 			model.addAttribute("message", insuranceProductService.deleteInsuranceProduct(insuranceProduct)? "삭제에 성공하였습니다.":"삭제에 실패하였습니다.");
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {

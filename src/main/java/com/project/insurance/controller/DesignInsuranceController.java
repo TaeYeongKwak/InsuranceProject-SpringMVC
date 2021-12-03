@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.insurance.exception.InsuranceDataAccessException;
+import com.project.insurance.exception.InsuranceNotFoundException;
 import com.project.insurance.model.insurance.ActualExpense;
 import com.project.insurance.model.insurance.Cancer;
 import com.project.insurance.model.insurance.InsuranceProduct;
@@ -36,6 +37,8 @@ public class DesignInsuranceController {
 	public String modifyInsurance(Model model, @PathVariable("product_name") String productName) {
 		try {
 			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
+			if(insuranceProduct == null) throw new InsuranceNotFoundException();
+			
 			model.addAttribute("insuranceProduct", insuranceProduct);
 			model.addAttribute("type", insuranceProduct.getInsuranceProductType().toString());
 		} catch (SQLException e) {

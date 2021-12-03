@@ -23,9 +23,9 @@ public class EmailController {
 	}
 
 	@RequestMapping(value = "manager/email/send", method = RequestMethod.POST)
-	public String send(@ModelAttribute Email dto, Model model) {
+	public String send(@ModelAttribute Email email, Model model) {
 		try {
-			emailService.sendMail(dto);
+			emailService.sendMail(email);
 			model.addAttribute("message", "이메일 발송이 완료되었습니다.");
 			
 		} catch (Exception e) {

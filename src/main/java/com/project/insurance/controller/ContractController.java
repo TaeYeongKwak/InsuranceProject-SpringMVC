@@ -48,6 +48,7 @@ public class ContractController {
 			
 			InsuranceProduct insuranceProduct = insuranceProductService.searchInsuranceProduct(productName);
 			if(insuranceProduct == null) throw new InsuranceNotFoundException();
+			
 			model.addAttribute("client", cresult);
 			model.addAttribute("insuranceProduct", insuranceProduct);
 		} catch (SQLException e) {

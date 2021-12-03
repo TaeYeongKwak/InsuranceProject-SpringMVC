@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.project.insurance.exception.ClientDataAccessException;
 import com.project.insurance.exception.ClientNotFoundException;
+import com.project.insurance.exception.ClientSessionExpiredException;
 
 @ControllerAdvice
 public class ClientExceptionAdvice {
@@ -34,6 +35,13 @@ public class ClientExceptionAdvice {
 			model.addAttribute("resultPage", "client/menu");
 		else
 			model.addAttribute("resultPage", "/");
+		return "message";
+	}
+	
+	@ExceptionHandler(ClientSessionExpiredException.class)
+	public String managerSessionExpired(Model model) {
+		model.addAttribute("message", "회원 세션이 만료되었습니다.");
+		model.addAttribute("resultPage", "/");
 		return "message";
 	}
 	

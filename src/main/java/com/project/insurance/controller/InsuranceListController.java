@@ -24,8 +24,8 @@ public class InsuranceListController {
 	public String insuranceList(Model model) {
 		try {
 			ArrayList<InsuranceProduct> list = insuranceProductService.showInsuranceProductIsNotApproval();
-			if (list.size() == 0)
-				throw new InsuranceNotFoundException();
+			if (list.size() == 0) throw new InsuranceNotFoundException();
+			
 			model.addAttribute("type", "acceptance");
 			model.addAttribute("insuranceList", list);
 		} catch (SQLException e) {
@@ -38,8 +38,8 @@ public class InsuranceListController {
 	public String insuranceListManage(Model model) {
 		try {
 			ArrayList<InsuranceProduct> list = insuranceProductService.showInsuranceProductIsNotApproval();
-			if (list.size() == 0)
-				throw new InsuranceNotFoundException();
+			if (list.size() == 0) throw new InsuranceNotFoundException();
+			
 			model.addAttribute("type", "manage");
 			model.addAttribute("insuranceList", list);
 		} catch (SQLException e) {
@@ -52,8 +52,8 @@ public class InsuranceListController {
 	public String insuranceListDelete(Model model) {
 		try {
 			ArrayList<InsuranceProduct> list = insuranceProductService.showInsuranceProductIsApproval();
-			if (list.size() == 0)
-				throw new InsuranceNotFoundException();
+			if (list.size() == 0) throw new InsuranceNotFoundException();
+			
 			model.addAttribute("type", "delete");
 			model.addAttribute("insuranceList", list);
 		} catch (SQLException e) {
@@ -66,8 +66,8 @@ public class InsuranceListController {
 	public String insuranceListSalesPerson(Model model) {
 		try {
 			ArrayList<InsuranceProduct> list = insuranceProductService.showInsuranceProductIsApproval();
-			if (list.size() == 0)
-				throw new InsuranceNotFoundException();
+			if (list.size() == 0) throw new InsuranceNotFoundException();
+			
 			model.addAttribute("type", "salesperson");
 			model.addAttribute("insuranceList", list);
 		} catch (SQLException e) {

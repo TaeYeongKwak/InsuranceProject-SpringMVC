@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.project.insurance.exception.ManagerDataAccessException;
 import com.project.insurance.exception.ManagerNotFoundException;
+import com.project.insurance.exception.ManagerSessionExpiredException;
 
 @ControllerAdvice
 public class ManagerExceptionAdvice {
 
 	@ExceptionHandler(ManagerNotFoundException.class)
 	public String managerNotFoundException(Model model) {
-
 		model.addAttribute("message", "해당 관리자가 존재하지 않습니다.");
 		model.addAttribute("resultPage", "/");
 		return "message";
@@ -29,6 +29,13 @@ public class ManagerExceptionAdvice {
 			model.addAttribute("resultPage", "manager/menu");
 		else
 			model.addAttribute("resultPage", "client/menu");
+		return "message";
+	}
+	
+	@ExceptionHandler(ManagerSessionExpiredException.class)
+	public String managerSessionExpired(Model model) {
+		model.addAttribute("message", "관리자 세션이 만료되었습니다.");
+		model.addAttribute("resultPage", "/");
 		return "message";
 	}
 
