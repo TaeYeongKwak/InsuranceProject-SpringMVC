@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.insurance.dao.AccidentDao;
@@ -24,22 +25,18 @@ import com.project.insurance.type.InsuranceProductType;
 @Service
 public class ContractServiceImpl implements ContractService{
 	
+	@Autowired
 	private ContractDao contractDao;
+	@Autowired
 	private AccidentDao accidentDao;
+	@Autowired
 	private InsuranceProductDao insuranceProductDao;
+	@Autowired
 	private ClientDao clientDao;
+	@Autowired
 	private MedicalHistoryDao medicalHistoryDao;
+	@Autowired
 	private ManagerDao managerDao; 
-	
-	public ContractServiceImpl(ContractDao contractDao, AccidentDao accidentDao, InsuranceProductDao insuranceProductDao,
-			ClientDao clientDao, MedicalHistoryDao medicalHistoryDao, ManagerDao managerDao) {
-		this.contractDao = contractDao;
-		this.accidentDao = accidentDao;
-		this.insuranceProductDao = insuranceProductDao;
-		this.clientDao = clientDao;
-		this.medicalHistoryDao = medicalHistoryDao;
-		this.managerDao = managerDao;
-	}
 	
 	@Override
 	public Contract searchByClientIdAndProductName(String clientId, String productName) throws SQLException {
@@ -137,17 +134,20 @@ public class ContractServiceImpl implements ContractService{
 	}
 	
 	private Contract insertContractData(Contract contract) throws SQLException{
-		contract.setInsuranceProduct(insuranceProductDao.search(contract.getInsuranceProduct().getProductName()));
-		Client client = clientDao.search(contract.getClient().getId());
-		MedicalHistory medicalHistory = medicalHistoryDao.search(client.getId());
-		Manager salesPerson = managerDao.search(contract.getSalesPerson().getId());
-		client.getMedicalHistory().setClientCancerCareer(medicalHistory.getClientCancerCareer());
-		client.getMedicalHistory().setFamilyCancerCareer(medicalHistory.getFamilyCancerCareer());
-		client.getMedicalHistory().setNumberOfHospitalizations(medicalHistory.getNumberOfHospitalizations());
-		client.getMedicalHistory().setNumberOfHospitalVisits(medicalHistory.getNumberOfHospitalVisits());
-		contract.setClient(client);
-		contract.setSalesPerson(salesPerson);
-		return contract;
+		if(contract != null) {
+			contract.setInsuranceProduct(insuranceProductDao.search(contract.getInsuranceProduct().getProductName()));
+			Client client = clientDao.search(contract.getClient().getId());
+			MedicalHistory medicalHistory = medicalHistoryDao.search(client.getId());
+			Manager salesPerson = managerDao.search(contract.getSalesPerson().getId());
+			client.getMedicalHistory().setClientCancerCareer(medicalHistory.getClientCancerCareer());
+			client.getMedicalHistory().setFamilyCancerCareer(medicalHistory.getFamilyCancerCareer());
+			client.getMedicalHistory().setNumberOfHospitalizations(medicalHistory.getNumberOfHospitalizations());
+			client.getMedicalHistory().setNumberOfHospitalVisits(medicalHistory.getNumberOfHospitalVisits());
+			contract.setClient(client);
+			contract.setSalesPerson(salesPerson);
+			return contract;
+		}
+		return null;
 	}
 
 	private ArrayList<Contract> insertContractData(ArrayList<Contract> list) throws SQLException{

@@ -18,6 +18,7 @@ import com.project.insurance.exception.ContractDataAccessException;
 import com.project.insurance.exception.DuplicateContractException;
 import com.project.insurance.exception.InsuranceDataAccessException;
 import com.project.insurance.exception.InsuranceNotFoundException;
+import com.project.insurance.exception.ManagerSessionExpiredException;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.Contract;
 import com.project.insurance.model.MedicalHistory;
@@ -42,7 +43,6 @@ public class ContractController {
 		try {
 			Client cresult = clientService.login(client.getId(), client.getPassword());
 			if(cresult == null) throw new ClientNotFoundException();
-			
 			if(contractService.searchByClientIdAndProductName(cresult.getId(), productName) != null)
 				throw new DuplicateContractException();
 			
@@ -63,6 +63,8 @@ public class ContractController {
 		try {
 			HttpSession session = request.getSession();
 			Manager salesPerson = (Manager) session.getAttribute("manager");
+			if(salesPerson == null) throw new ManagerSessionExpiredException();
+			
 			Client cresult = clientService.checkClientID(clientId);
 			if(cresult == null) throw new ClientNotFoundException();
 			

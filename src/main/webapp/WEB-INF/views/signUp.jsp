@@ -111,6 +111,16 @@ h1 {
             }
          });
       }
+      
+      function changeDisabled1(){
+  		var btn = document.getElementById("cSignUpBtn");
+  		btn.disabled = true;
+  	  }
+      
+      function changeDisabled1(){
+    	var btn = document.getElementById("mSignUpBtn");
+    	btn.disabled = true;
+      }
    </script>
    <div class="sign_up_container">
       <c:choose>
@@ -121,7 +131,7 @@ h1 {
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">ID</span> 
                   <input type="text" class="form-control" id="cid" placeholder="Enter ID"
-                     name="id" required pattern="^[a-zA-Z0-9]+$" maxlength="40">
+                     name="id" required pattern="^[a-zA-Z0-9]+$" maxlength="40" onchange="changeDisabled1()">
                   <button class="btn btn-primary" type="button"
                      onclick="checkCId();">Check ID</button>
                   <div class="valid-feedback">Valid.</div>
@@ -228,7 +238,7 @@ h1 {
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">ID</span> <input
                      type="text" class="form-control" id="mid" placeholder="Enter ID"
-                     name="id" required pattern="^[a-zA-Z0-9]+$" maxlength="40">
+                     name="id" required pattern="^[a-zA-Z0-9]+$" maxlength="40" onchange="changeDisabled2()">
                   <button class="btn btn-primary" type="button"
                      onclick="checkMId();">Check ID</button>
                   <div class="valid-feedback">Valid.</div>
@@ -244,7 +254,7 @@ h1 {
                <div class="input-group mb-3 mt-3">
                   <span class="input-group-text input_span">User name</span> <input
                      type="text" class="form-control" id="mname"
-                     placeholder="Enter Username" name="name" required pattern="[ㄱ-힣]" maxlength="40">
+                     placeholder="Enter Username" name="name" required maxlength="40">
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                </div>

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.insurance.model.Client;
@@ -20,11 +21,8 @@ import com.project.insurance.model.manager.Manager;
 @Repository
 public class ContractDaoImpl implements ContractDao{
 	
-	private final SqlSession sqlSession;
-	
-	public ContractDaoImpl(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
-	}
+	@Autowired
+	private SqlSession sqlSession;
 
 	@Override
 	public boolean add(Contract contract) throws SQLException{
@@ -53,7 +51,6 @@ public class ContractDaoImpl implements ContractDao{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("clientID", clientID);
 		map.put("insuranceProductName", productName);
-		
 		HashMap<String, String> contractMap = sqlSession.selectOne("contract_selectOne", map);
 		return this.toContract(contractMap);
 		

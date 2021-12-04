@@ -91,18 +91,22 @@ h1 {
               if (data == 1) {
                  alert("사용할 수 있는 상품이름입니다.")
                  var btn = document.getElementById("subBtn");
-                 btn.disabled = true;
-                 subBtn
+                 btn.disabled = false;
                  
               } else {
                  alert("사용할 수 없는 상품이름입니다.")
                  var btn = document.getElementById("subBtn");
-                 btn.disabled = false;
+                 btn.disabled = true;
               }
            },
            error : function() {
            }
         });
+	}
+	
+	function changeDisabled(){
+		var btn = document.getElementById("subBtn");
+		btn.disabled = true;
 	}
 </script>
 </head>
@@ -171,7 +175,7 @@ h1 {
 				<span class="input-group-text input_span">보험이름</span> 
 				<input type="text" class="form-control" id="productName"
 					placeholder="InsuranceName" name="productName" maxlength="40"
-					required>
+					onchange="changeDisabled()" required>
 				<input type="button" class="btn btn-primary" onclick="checkName()" value = "check name" />
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>

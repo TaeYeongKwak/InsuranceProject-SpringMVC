@@ -131,6 +131,7 @@ h2 {
 				<option value="COLORECTAL">4.대장암</option>
 				<option value="LIVER">5.간암</option>
 				<option value="ETC">6.기타</option>
+				<option value="HEALTHY">7.건강</option>
 			</select>
 			</div>
 
@@ -149,12 +150,12 @@ h2 {
 	
 			<div class="input-group mb-3">
 				<span class="input-group-text">고객 입원 횟수</span> 
-				<input type="text" class="form-control" id="numberOfHospitalizations" name="numberOfHospitalizations" required>
+				<input type="number" class="form-control" id="numberOfHospitalizations" max="9999" min="0" name="numberOfHospitalizations" required>
 			</div>
 	
 			<div class="input-group mb-3">
 				<span class="input-group-text">고객 병원 방문 횟수</span> 
-				<input type="text" class="form-control" id="numberOfHospitalVisits" name="numberOfHospitalVisits" required>
+				<input type="number" class="form-control" id="numberOfHospitalVisits" max="9999" min="0" name="numberOfHospitalVisits" required>
 			</div>
 			<input type="hidden" name="clientId" value="${client.id }">
 			<input type="hidden" name="productName" value="${insuranceProduct.productName }">

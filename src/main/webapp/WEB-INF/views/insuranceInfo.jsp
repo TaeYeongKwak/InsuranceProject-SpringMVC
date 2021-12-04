@@ -117,7 +117,7 @@
         		<a href = "${pageContext.request.contextPath}/product/approval?productName=${insuranceProduct.productName}" class="btn btn-primary">
             		승인하기
         		</a>
-        		<button class="btn btn-primary">
+        		<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/product/info/delete?productName=${insuranceProduct.productName}'">
             		승인거절
         		</button>
         	</c:when>
