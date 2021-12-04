@@ -27,12 +27,20 @@
             min-height: 300px;
         }
     </style>
+    <script>
+    	function formSubmit(){
+    		document.getElementById('subBtn').disabled = true;
+    		var frm = document.getElementById('emailForm');
+    		frm.submit();
+    	}
+    </script>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
     <div class="email_container">
         <h1>Email Send</h1>
-        <form method ="POST" action ="${pageContext.request.contextPath}/manager/email/send">
+        <form id = "emailForm" method ="POST" action ="${pageContext.request.contextPath}/manager/email/send">
+        
             <div class="input-group mb-3 mt-3">
                 <span class="input-group-text input_span">보내시는 분</span>
                 <input type="email" class="form-control" id="uname" placeholder="Enter Email" name="senderMail" required>
@@ -48,7 +56,7 @@
             <div>
             <textarea class="email_content" name="message"></textarea>
             </div>
-            <button type = "submit" class="btn btn-outline-primary">이메일 전송</button>
+            <button type = "button" id="subBtn" onclick="formSubmit()" class="btn btn-outline-primary">이메일 전송</button>
         </form>
     </div>
 </body>
