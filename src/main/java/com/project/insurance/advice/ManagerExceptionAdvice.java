@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.project.insurance.exception.DuplicateManagerIdException;
 import com.project.insurance.exception.ManagerDataAccessException;
 import com.project.insurance.exception.ManagerNotFoundException;
 import com.project.insurance.exception.ManagerSessionExpiredException;
@@ -35,6 +36,13 @@ public class ManagerExceptionAdvice {
 	@ExceptionHandler(ManagerSessionExpiredException.class)
 	public String managerSessionExpired(Model model) {
 		model.addAttribute("message", "관리자 세션이 만료되었습니다.");
+		model.addAttribute("resultPage", "/");
+		return "message";
+	}
+	
+	@ExceptionHandler(DuplicateManagerIdException.class)
+	public String duplicateManagerId(Model model) {
+		model.addAttribute("message", "중복된 ID를 입력하셨습니다. 다시 진행해주세요.");
 		model.addAttribute("resultPage", "/");
 		return "message";
 	}

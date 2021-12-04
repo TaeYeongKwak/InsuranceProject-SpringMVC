@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.project.insurance.exception.ClientDataAccessException;
 import com.project.insurance.exception.ClientNotFoundException;
 import com.project.insurance.exception.ClientSessionExpiredException;
+import com.project.insurance.exception.DuplicateClientIdException;
 
 @ControllerAdvice
 public class ClientExceptionAdvice {
@@ -41,6 +42,13 @@ public class ClientExceptionAdvice {
 	@ExceptionHandler(ClientSessionExpiredException.class)
 	public String managerSessionExpired(Model model) {
 		model.addAttribute("message", "회원 세션이 만료되었습니다.");
+		model.addAttribute("resultPage", "/");
+		return "message";
+	}
+	
+	@ExceptionHandler(DuplicateClientIdException.class)
+	public String duplicateManagerId(Model model) {
+		model.addAttribute("message", "중복된 ID를 입력하셨습니다. 다시 진행해주세요.");
 		model.addAttribute("resultPage", "/");
 		return "message";
 	}

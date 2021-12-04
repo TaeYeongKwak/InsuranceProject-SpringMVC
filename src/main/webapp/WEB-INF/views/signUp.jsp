@@ -117,7 +117,7 @@ h1 {
   		btn.disabled = true;
   	  }
       
-      function changeDisabled1(){
+      function changeDisabled2(){
     	var btn = document.getElementById("mSignUpBtn");
     	btn.disabled = true;
       }

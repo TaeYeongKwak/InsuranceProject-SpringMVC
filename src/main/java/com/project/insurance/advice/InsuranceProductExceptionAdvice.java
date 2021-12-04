@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.project.insurance.exception.DuplicateProductNameException;
 import com.project.insurance.exception.InsuranceDataAccessException;
 import com.project.insurance.exception.InsuranceNotFoundException;
 
@@ -32,6 +33,13 @@ public class InsuranceProductExceptionAdvice {
 			model.addAttribute("resultPage", "manager/menu");
 		else
 			model.addAttribute("resultPage", "client/menu");
+		return "message";
+	}
+	
+	@ExceptionHandler(DuplicateProductNameException.class)
+	public String duplicateProductName(Model model) {
+		model.addAttribute("message", "중복된 제품 이름을 입력하셨습니다. 다시 진행해주세요.");
+		model.addAttribute("resultPage", "manager/menu");
 		return "message";
 	}
 	

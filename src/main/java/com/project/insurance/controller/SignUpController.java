@@ -3,6 +3,7 @@ package com.project.insurance.controller;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.insurance.exception.DuplicateClientIdException;
+import com.project.insurance.exception.DuplicateManagerIdException;
 import com.project.insurance.exception.ManagerDataAccessException;
 import com.project.insurance.model.Client;
 import com.project.insurance.model.manager.Manager;
@@ -33,6 +36,8 @@ public class SignUpController {
 			model.addAttribute("resultPage", "/");
 		} catch (SQLException e) {
 			throw new ManagerDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateManagerIdException();
 		}
 		return "message";
 	}
@@ -44,6 +49,8 @@ public class SignUpController {
 			model.addAttribute("resultPage", "/");
 		} catch (SQLException e) {
 			throw new ManagerDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateClientIdException();
 		}
 		return "message";
 	}

@@ -3,6 +3,7 @@ package com.project.insurance.controller;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.insurance.exception.DuplicateProductNameException;
 import com.project.insurance.exception.InsuranceDataAccessException;
 import com.project.insurance.exception.InsuranceNotFoundException;
 import com.project.insurance.model.insurance.ActualExpense;
@@ -56,6 +58,8 @@ public class DesignInsuranceController {
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
 			throw new InsuranceDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateProductNameException();
 		}
 		return "message";
 	}
@@ -69,6 +73,8 @@ public class DesignInsuranceController {
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
 			throw new InsuranceDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateProductNameException();
 		}
 		return "message";
 	}
@@ -82,6 +88,8 @@ public class DesignInsuranceController {
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
 			throw new InsuranceDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateProductNameException();
 		}
 		return "message";
 	}
@@ -95,6 +103,8 @@ public class DesignInsuranceController {
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
 			throw new InsuranceDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateProductNameException();
 		}
 		return "message";
 	}
@@ -121,6 +131,8 @@ public class DesignInsuranceController {
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
 			throw new InsuranceDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateProductNameException();
 		}
 		return "message";
 	}
@@ -134,6 +146,8 @@ public class DesignInsuranceController {
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
 			throw new InsuranceDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateProductNameException();
 		}
 		return "message";
 	}
@@ -147,6 +161,8 @@ public class DesignInsuranceController {
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
 			throw new InsuranceDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateProductNameException();
 		}
 		return "message";
 	}
@@ -160,6 +176,8 @@ public class DesignInsuranceController {
 			model.addAttribute("resultPage", "manager/menu");
 		} catch (SQLException e) {
 			throw new InsuranceDataAccessException();
+		} catch (DuplicateKeyException e) {
+			throw new DuplicateProductNameException();
 		}
 		return "message";
 	}
